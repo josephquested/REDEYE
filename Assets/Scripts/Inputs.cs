@@ -5,17 +5,20 @@ using UnityEngine;
 public class Inputs : MonoBehaviour {
 	Moves moves;
 	Gun gun;
+	Blade blade;
 
 	void Start ()
 	{
 		moves = GetComponent<Moves>();
 		gun = GetComponentsInChildren<Gun>()[0];
+		blade = GetComponentsInChildren<Blade>()[0];
 	}
 
 	void Update ()
 	{
 		MovementInput();
 		FireInput();
+		BladeInput();
 	}
 
 	void MovementInput ()
@@ -28,10 +31,18 @@ public class Inputs : MonoBehaviour {
 
 	void FireInput ()
 	{
-		if (Input.GetButtonUp("Fire1"))
+		if (Input.GetButtonUp("Fire2"))
 		{
 			gun.AttemptFire();
 		}
-		gun.ReceiveInput(Input.GetButton("Fire1"));
+		gun.ReceiveInput(Input.GetButton("Fire2"));
+	}
+
+	void BladeInput ()
+	{
+		if (Input.GetButtonDown("Fire1"))
+		{
+			blade.ReceiveInput();
+		}
 	}
 }
