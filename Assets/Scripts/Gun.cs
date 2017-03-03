@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour {
 	AudioSource audioSource;
-	ParticleSystem particleSystem;
+	Animator animator;
+	ParticleSystem particles;
 	Light lightSource;
 	CameraShake cameraShake;
 
@@ -19,9 +20,10 @@ public class Gun : MonoBehaviour {
 	void Start ()
 	{
 		audioSource = GetComponent<AudioSource>();
+		animator = GetComponent<Animator>();
 		lightSource = GetComponentsInChildren<Light>()[0];
 		cameraShake = transform.parent.GetComponentsInChildren<CameraShake>()[0];
-		particleSystem = transform.parent.GetComponentsInChildren<ParticleSystem>()[0];
+		particles = transform.parent.GetComponentsInChildren<ParticleSystem>()[0];
 	}
 
 	void Update ()
@@ -67,6 +69,7 @@ public class Gun : MonoBehaviour {
 	{
 		if (heat >= 0.99f)
 		{
+			animator.SetTrigger("fire");
 			Fire();
 		}
 		else
@@ -102,11 +105,11 @@ public class Gun : MonoBehaviour {
 	{
 		if (heat > 0.5 && heating)
 		{
-			particleSystem.Play();
+			particles.Play();
 		}
 		else
 		{
-			particleSystem.Stop();
+			particles.Stop();
 		}
 	}
 }
