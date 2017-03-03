@@ -34,7 +34,9 @@ public class CameraShake : MonoBehaviour {
 
 	public void ReceiveInput (float heat)
 	{
-		// call shake camera in a controlable way. It never goes over a certian time or strength etc.
+		shakeAmount = heat;
+		shakeDuration = heat;
+		ShakeCamera(0, 0);
 	}
 
 	public void ShakeCamera(float amount, float duration) {

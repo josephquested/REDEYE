@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour {
 	AudioSource audioSource;
+	ParticleSystem particleSystem;
 	Light lightSource;
 	CameraShake cameraShake;
 
+	bool heating;
+
+	public GameObject laserPrefab;
+	public Transform laserSpawn;
 	public float heat;
 	public float heatSpeed;
+	public float laserSpeed;
 
 	void Start ()
 	{
 		audioSource = GetComponent<AudioSource>();
 		lightSource = GetComponentsInChildren<Light>()[0];
 		cameraShake = transform.parent.GetComponentsInChildren<CameraShake>()[0];
+		particleSystem = transform.parent.GetComponentsInChildren<ParticleSystem>()[0];
 	}
 
 	void Update ()
@@ -22,12 +29,15 @@ public class Gun : MonoBehaviour {
 		UpdateAudio();
 		UpdateLight();
 		UpdateCameraShake();
+		UpdateParticles();
 	}
 
-	public void ReceiveInput (bool heating)
+	public void ReceiveInput (bool shouldHeat)
 	{
-		if (heating)
+		if (shouldHeat)
 		{
+			heating = true;
+
 			if (heat < 1)
 			{
 				heat += heatSpeed;
@@ -40,6 +50,8 @@ public class Gun : MonoBehaviour {
 
 		else
 		{
+			heating = false;
+
 			if (heat > 0)
 			{
 				heat -= heatSpeed;
@@ -49,21 +61,52 @@ public class Gun : MonoBehaviour {
 				heat = 0;
 			}
 		}
-		print(heat);
+	}
+
+	public void AttemptFire ()
+	{
+		if (heat >= 0.99f)
+		{
+			Fire();
+		}
+		else
+		{
+			print("failed!");
+		}
+	}
+
+	void Fire ()
+	{
+		var laser = Instantiate(laserPrefab, laserSpawn.position, laserSpawn.rotation);
+		laser.GetComponent<Rigidbody>().AddForce(transform.forward * laserSpeed);
+		laserSpawn.gameObject.GetComponent<AudioSource>().Play();
 	}
 
 	void UpdateCameraShake ()
 	{
-		cameraShake.ShakeCamera(heat, heat);
+		cameraShake.ReceiveInput(heat);
 	}
 
 	void UpdateAudio ()
 	{
 		audioSource.volume = heat;
+		audioSource.pitch = heat * 3;
 	}
 
 	void UpdateLight ()
 	{
 		lightSource.range = heat * 3;
+	}
+
+	void UpdateParticles ()
+	{
+		if (heat > 0.5 && heating)
+		{
+			particleSystem.Play();
+		}
+		else
+		{
+			particleSystem.Stop();
+		}
 	}
 }

@@ -28,6 +28,10 @@ public class Inputs : MonoBehaviour {
 
 	void FireInput ()
 	{
+		if (Input.GetButtonUp("Fire1"))
+		{
+			gun.AttemptFire();
+		}
 		gun.ReceiveInput(Input.GetButton("Fire1"));
 	}
 }
