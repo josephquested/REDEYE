@@ -11,8 +11,9 @@ public class Blade : MonoBehaviour {
 
 	bool firing;
 
+	public float heat;
+	public float heatSpeed;
 	public float thrust;
-	public float thrustPause;
 	public float cooldown;
 
 	void Start ()
@@ -26,48 +27,69 @@ public class Blade : MonoBehaviour {
 
 	void Update ()
 	{
-		UpdateCameraShake();
-		UpdateParticles();
+		UpdateAnimator();
+		// UpdateCameraShake();
 	}
 
-	public void ReceiveInput ()
+	public void ReceiveInput (bool shouldHeat)
 	{
-		if (!firing)
+		if (shouldHeat)
 		{
-			StartCoroutine(FireRoutine());
+			animator.SetBool("heating", true);
+
+			if (heat < 1)
+			{
+				heat += heatSpeed;
+			}
+			else
+			{
+				heat = 1;
+			}
 		}
+
 		else
 		{
-			print("already attacking");
+			animator.SetBool("heating", false);
+
+			if (heat > 0)
+			{
+				heat -= heatSpeed;
+			}
+			else
+			{
+				heat = 0;
+			}
+		}
+	}
+
+	public void AttemptFire ()
+	{
+		if (heat >= 0.99f)
+		{
+			animator.SetTrigger("fire");
+			StartCoroutine(FireRoutine());
 		}
 	}
 
 	IEnumerator FireRoutine ()
 	{
-		print("firing");
 		firing = true;
-		animator.SetTrigger("fire");
-		yield return new WaitForSeconds(thrustPause);
 		audioSource.Play();
 		parentRb.AddForce(transform.parent.forward * thrust);
 		yield return new WaitForSeconds(cooldown);
 		firing = false;
 	}
 
-	void UpdateCameraShake ()
-	{
-		// cameraShake.ReceiveInput(heat);
-	}
 
-	void UpdateParticles ()
+	public void UpdateAnimator ()
 	{
-		// if (heat > 0.5 && heating)
-		// {
-		// 	particles.Play();
-		// }
-		// else
-		// {
-		// 	particles.Stop();
-		// }
+		if (heat >= 0.99)
+		{
+			animator.SetBool("hot", true);
+		}
+		else
+		{
+			animator.SetBool("hot", false);
+		}
 	}
 }

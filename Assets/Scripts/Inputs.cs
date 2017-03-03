@@ -40,9 +40,10 @@ public class Inputs : MonoBehaviour {
 
 	void BladeInput ()
 	{
-		if (Input.GetButtonDown("Fire1"))
+		if (Input.GetButtonUp("Fire1"))
 		{
-			blade.ReceiveInput();
+			blade.AttemptFire();
 		}
+		blade.ReceiveInput(Input.GetButton("Fire1"));
 	}
 }
