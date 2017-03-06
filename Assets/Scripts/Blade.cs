@@ -64,7 +64,7 @@ public class Blade : MonoBehaviour {
 
 	public void AttemptFire ()
 	{
-		if (heat >= 0.99f)
+		if (heat >= 0.99f && !firing)
 		{
 			animator.SetTrigger("fire");
 			StartCoroutine(FireRoutine());
