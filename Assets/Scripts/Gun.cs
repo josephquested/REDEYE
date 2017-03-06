@@ -8,6 +8,7 @@ public class Gun : MonoBehaviour {
 	ParticleSystem particles;
 	Light lightSource;
 	CameraShake cameraShake;
+	Rigidbody parentRb;
 
 	bool heating;
 
@@ -16,6 +17,7 @@ public class Gun : MonoBehaviour {
 	public float heat;
 	public float heatSpeed;
 	public float laserSpeed;
+	public float recoil;
 
 	void Start ()
 	{
@@ -24,6 +26,7 @@ public class Gun : MonoBehaviour {
 		lightSource = GetComponentsInChildren<Light>()[0];
 		cameraShake = transform.parent.GetComponentsInChildren<CameraShake>()[0];
 		particles = transform.parent.GetComponentsInChildren<ParticleSystem>()[0];
+		parentRb = transform.parent.gameObject.GetComponent<Rigidbody>();
 	}
 
 	void Update ()
@@ -83,6 +86,7 @@ public class Gun : MonoBehaviour {
 		var laser = Instantiate(laserPrefab, laserSpawn.position, laserSpawn.rotation);
 		laser.GetComponent<Rigidbody>().AddForce(transform.forward * laserSpeed);
 		laserSpawn.gameObject.GetComponent<AudioSource>().Play();
+		Recoil();
 	}
 
 	void UpdateCameraShake ()
@@ -111,5 +115,11 @@ public class Gun : MonoBehaviour {
 		{
 			particles.Stop();
 		}
+	}
+
+	void Recoil ()
+	{
+		Vector3 force = -parentRb.gameObject.transform.forward;
+		parentRb.AddForce(force * recoil);
 	}
 }
