@@ -3,12 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Knockback : MonoBehaviour {
-	Rigidbody rb;
-
-	void Start ()
-	{
-		rb = GetComponent<Rigidbody>();
-	}
+	public Rigidbody rb;
 
 	public void ReceiveKnockback (Vector3 direction, float force)
 	{

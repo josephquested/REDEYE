@@ -13,6 +13,7 @@ public class Blade : MonoBehaviour {
 	public float heatSpeed;
 	public float thrust;
 	public float cooldown;
+	public float knockback;
 	public bool firing;
 
 	void Start ()
@@ -82,6 +83,11 @@ public class Blade : MonoBehaviour {
 
 	public void Strike (Collider collider)
 	{
+		if (collider.gameObject.GetComponent<Knockback>() != null)
+		{
+			Vector3 direction = transform.parent.forward;
+			collider.gameObject.GetComponent<Knockback>().ReceiveKnockback(direction, knockback);
+		}
 		collider.gameObject.GetComponent<Status>().Damage(2);
 		parentRb.velocity = Vector3.zero;
 	}

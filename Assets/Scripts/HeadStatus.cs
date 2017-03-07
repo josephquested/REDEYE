@@ -7,10 +7,13 @@ public class HeadStatus : Status {
 
 	public override void Damage (int damage)
 	{
-		Die();
+		if (!playerStatus.dead)
+		{
+			NormalDie();
+		}
 	}
 
-	void Die ()
+	void NormalDie ()
 	{
 		playerStatus.Die();
 	}

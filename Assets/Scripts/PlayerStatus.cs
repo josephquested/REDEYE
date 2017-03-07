@@ -10,18 +10,16 @@ public class PlayerStatus : Status {
 
 	public override void Damage (int damage)
 	{
-		if (dead)
+		if (!dead)
 		{
-			return;
-		}
-
-		if (damage > 1 || damaged)
-		{
-			Die();
-		}
-		else
-		{
-			damaged = true;
+			if (damage > 1 || damaged)
+			{
+				Die();
+			}
+			else
+			{
+				damaged = true;
+			}
 		}
 	}
 
@@ -31,6 +29,7 @@ public class PlayerStatus : Status {
 
 		Destroy(GetComponent<Inputs>());
 		Destroy(GetComponent<Move>());
+		Destroy(GetComponent<Knockback>());
 	 	GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
 
 		AudioSource audioSource = GetComponent<AudioSource>();
