@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Moves : MonoBehaviour {
+public class Move : MonoBehaviour {
 	Rigidbody rb;
 	public float speed;
 
@@ -14,10 +14,10 @@ public class Moves : MonoBehaviour {
 	public void ReceiveInput (float horizontal, float vertical)
 	{
 		Vector3 movement = new Vector3(horizontal, 0, vertical);
-		Move(movement);
+		Movement(movement);
 	}
 
-	void Move (Vector3 movement)
+	void Movement (Vector3 movement)
 	{
 		rb.AddRelativeForce(movement * speed);
 	}

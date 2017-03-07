@@ -54,7 +54,8 @@
      <Compile Include="Assets\Scripts\Inputs.cs" />
      <Compile Include="Assets\Scripts\Laser.cs" />
      <Compile Include="Assets\Scripts\MouseLook.cs" />
-     <Compile Include="Assets\Scripts\Moves.cs" />
+     <Compile Include="Assets\Scripts\Move.cs" />
+     <Compile Include="Assets\Scripts\Status.cs" />
      <None Include="Assets\Materials\Glass Shaders\Double Sided Glass Reflection (Advanced) Old.shader" />
      <None Include="Assets\Materials\Glass Shaders\Glass (Fast).shader" />
      <None Include="Assets\Materials\Glass Shaders\Glass Reflection (Advanced).shader" />

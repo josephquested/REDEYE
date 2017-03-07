@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Inputs : MonoBehaviour {
-	Moves moves;
+	Move move;
 	Gun gun;
 	Blade blade;
 
 	void Start ()
 	{
-		moves = GetComponent<Moves>();
+		move = GetComponent<Move>();
 		gun = GetComponentsInChildren<Gun>()[0];
 		blade = GetComponentsInChildren<Blade>()[0];
 	}
@@ -25,7 +25,7 @@ public class Inputs : MonoBehaviour {
 	{
 		if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
 		{
-			moves.ReceiveInput(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+			move.ReceiveInput(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 		}
 	}
 
