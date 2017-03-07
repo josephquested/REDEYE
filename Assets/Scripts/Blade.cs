@@ -80,6 +80,12 @@ public class Blade : MonoBehaviour {
 		firing = false;
 	}
 
+	public void Strike (Collider collider)
+	{
+		collider.gameObject.GetComponent<Status>().Damage(2);
+		parentRb.velocity = Vector3.zero;
+	}
+
 	void UpdateParticles ()
 	{
 		if (heat > 0.99f && !firing)

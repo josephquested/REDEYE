@@ -13,6 +13,11 @@ public class HeadStatus : Status {
 	void Die ()
 	{
 		playerStatus.Die();
+	}
+
+	void ViolentDie ()
+	{
+		playerStatus.Die();
 		Destroy(gameObject);
 	}
 }

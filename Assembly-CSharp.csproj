@@ -50,6 +50,7 @@
      <Compile Include="Assets\Scripts\Blade.cs" />
      <Compile Include="Assets\Scripts\BladeTip.cs" />
      <Compile Include="Assets\Scripts\CameraShake.cs" />
+     <Compile Include="Assets\Scripts\EyeLight.cs" />
      <Compile Include="Assets\Scripts\Gun.cs" />
      <Compile Include="Assets\Scripts\Halflife.cs" />
      <Compile Include="Assets\Scripts\HeadStatus.cs" />

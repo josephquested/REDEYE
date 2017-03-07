@@ -11,7 +11,7 @@ public class BladeTip : MonoBehaviour {
 		{
 			if (blade.firing)
 			{
-				collider.gameObject.GetComponent<Status>().Damage(2);
+				blade.Strike(collider);
 			}
 		}
 	}
