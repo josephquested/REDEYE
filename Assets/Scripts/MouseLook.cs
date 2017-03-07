@@ -1,14 +1,15 @@
 using UnityEngine;
+using UnityEngine.Networking;
 
 // Very simple smooth mouselook modifier for the MainCamera in Unity
 // by Francis R. Griffiths-Keam - www.runningdimensions.com
 
 [AddComponentMenu("Camera/Simple Smooth Mouse Look ")]
-public class MouseLook : MonoBehaviour
+public class MouseLook : NetworkBehaviour
 {
     Vector2 _mouseAbsolute;
     Vector2 _smoothMouse;
-      
+
     public Vector2 clampInDegrees = new Vector2(360, 180);
     public bool lockCursor;
     public Vector2 sensitivity = new Vector2(2, 2);
@@ -31,6 +32,10 @@ public class MouseLook : MonoBehaviour
 
     void Update()
     {
+        if (!isLocalPlayer)
+        {
+          return;
+        }
         // Ensure the cursor is always locked when set
         Cursor.lockState = CursorLockMode.Locked;
 

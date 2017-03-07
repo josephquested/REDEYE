@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Networking;
 using UnityEngine;
 
-public class Inputs : MonoBehaviour {
+public class Inputs : NetworkBehaviour {
 	Move move;
 	Gun gun;
 	Blade blade;
@@ -16,6 +17,10 @@ public class Inputs : MonoBehaviour {
 
 	void Update ()
 	{
+		if (!isLocalPlayer)
+		{
+	    return;
+		}
 		MovementInput();
 		FireInput();
 		BladeInput();
