@@ -29,7 +29,7 @@ public class Blade : MonoBehaviour {
 	{
 		UpdateAnimator();
 		UpdateParticles();
-		// UpdateCameraShake();
+		UpdateCameraShake();
 	}
 
 	public void ReceiveInput (bool shouldHeat)
@@ -102,6 +102,11 @@ public class Blade : MonoBehaviour {
 		{
 			particles.Stop();
 		}
+	}
+
+	void UpdateCameraShake ()
+	{
+		cameraShake.ReceiveInput(heat);
 	}
 
 	public void UpdateAnimator ()
