@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class HeadStatus : Status {
+	public PlayerStatus playerStatus;
+
 	public override void Damage (int damage)
 	{
 		Die();
@@ -10,7 +12,7 @@ public class HeadStatus : Status {
 
 	void Die ()
 	{
-		transform.parent.gameObject.GetComponent<PlayerStatus>().Die();
+		playerStatus.Die();
 		Destroy(gameObject);
 	}
 }

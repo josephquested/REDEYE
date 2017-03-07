@@ -43,7 +43,7 @@ public class Laser : MonoBehaviour {
 	{
 		GetComponent<Rigidbody>().velocity = Vector3.zero;
 		explosionParticles.Play();
-		yield return new WaitForSeconds(0.2f);
+		yield return new WaitForSeconds(0.5f);
 		Destroy(gameObject);
 	}
 }

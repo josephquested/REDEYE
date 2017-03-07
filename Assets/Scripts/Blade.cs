@@ -6,19 +6,18 @@ public class Blade : MonoBehaviour {
 	Animator animator;
 	Rigidbody parentRb;
 	AudioSource audioSource;
-	// ParticleSystem particles;
+	ParticleSystem particles;
 	CameraShake cameraShake;
-
-	bool firing;
 
 	public float heat;
 	public float heatSpeed;
 	public float thrust;
 	public float cooldown;
+	public bool firing;
 
 	void Start ()
 	{
-		// particles = transform.parent.GetComponentsInChildren<ParticleSystem>()[0];
+		particles = GetComponentsInChildren<ParticleSystem>()[0];
 		audioSource = GetComponent<AudioSource>();
 		parentRb = transform.parent.gameObject.GetComponent<Rigidbody>();
 		animator = GetComponent<Animator>();
@@ -28,6 +27,7 @@ public class Blade : MonoBehaviour {
 	void Update ()
 	{
 		UpdateAnimator();
+		UpdateParticles();
 		// UpdateCameraShake();
 	}
 
@@ -80,6 +80,17 @@ public class Blade : MonoBehaviour {
 		firing = false;
 	}
 
+	void UpdateParticles ()
+	{
+		if (heat > 0.99f && !firing)
+		{
+			particles.Play();
+		}
+		else
+		{
+			particles.Stop();
+		}
+	}
 
 	public void UpdateAnimator ()
 	{

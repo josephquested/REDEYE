@@ -10,6 +10,11 @@ public class PlayerStatus : Status {
 
 	public override void Damage (int damage)
 	{
+		if (dead)
+		{
+			return;
+		}
+		
 		if (damage > 1 || damaged)
 		{
 			Die();
@@ -33,6 +38,5 @@ public class PlayerStatus : Status {
 		audioSource.Play();
 
 		Destroy(eyeLight);
-		Destroy(this);
 	}
 }
