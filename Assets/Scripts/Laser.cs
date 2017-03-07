@@ -28,4 +28,12 @@ public class Laser : MonoBehaviour {
 	 	yield return new WaitForSeconds(spawnDelay);
 		canSpawnTail = true;
 	}
+
+	void OnTriggerEnter (Collider collider)
+	{
+		if (collider.gameObject.GetComponent<Status>() != null)
+		{
+			collider.gameObject.GetComponent<Status>().Damage(1);
+		}
+	}
 }

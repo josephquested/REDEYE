@@ -75,10 +75,6 @@ public class Gun : MonoBehaviour {
 			animator.SetTrigger("fire");
 			Fire();
 		}
-		else
-		{
-			print("failed!");
-		}
 	}
 
 	void Fire ()

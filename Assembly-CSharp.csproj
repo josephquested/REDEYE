@@ -51,10 +51,12 @@
      <Compile Include="Assets\Scripts\CameraShake.cs" />
      <Compile Include="Assets\Scripts\Gun.cs" />
      <Compile Include="Assets\Scripts\Halflife.cs" />
+     <Compile Include="Assets\Scripts\HeadStatus.cs" />
      <Compile Include="Assets\Scripts\Inputs.cs" />
      <Compile Include="Assets\Scripts\Laser.cs" />
      <Compile Include="Assets\Scripts\MouseLook.cs" />
      <Compile Include="Assets\Scripts\Move.cs" />
+     <Compile Include="Assets\Scripts\PlayerStatus.cs" />
      <Compile Include="Assets\Scripts\Status.cs" />
      <None Include="Assets\Materials\Glass Shaders\Double Sided Glass Reflection (Advanced) Old.shader" />
      <None Include="Assets\Materials\Glass Shaders\Glass (Fast).shader" />
