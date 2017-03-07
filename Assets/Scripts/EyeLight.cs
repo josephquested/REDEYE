@@ -33,7 +33,7 @@ public class EyeLight : MonoBehaviour {
 			if (!lit && eyeLight.intensity >= 7.99f)
 			{
 				lit = true;
-			}			
+			}
 		}
 	}
 }

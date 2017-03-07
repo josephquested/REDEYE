@@ -5,6 +5,7 @@ using UnityEngine;
 public class Laser : MonoBehaviour {
 	public GameObject tailPrefab;
 	public float spawnDelay;
+	public float knockback;
 	public ParticleSystem explosionParticles;
 
 	bool canSpawnTail = true;
@@ -32,6 +33,12 @@ public class Laser : MonoBehaviour {
 
 	void OnTriggerEnter (Collider collider)
 	{
+		if (collider.gameObject.GetComponent<Knockback>() != null)
+		{
+			Vector3 direction = GetComponent<Rigidbody>().velocity;
+			collider.gameObject.GetComponent<Knockback>().ReceiveKnockback(direction, knockback);
+		}
+
 		if (collider.gameObject.GetComponent<Status>() != null)
 		{
 			collider.gameObject.GetComponent<Status>().Damage(1);

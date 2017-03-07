@@ -14,7 +14,7 @@ public class PlayerStatus : Status {
 		{
 			return;
 		}
-		
+
 		if (damage > 1 || damaged)
 		{
 			Die();

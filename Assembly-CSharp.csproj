@@ -55,6 +55,7 @@
      <Compile Include="Assets\Scripts\Halflife.cs" />
      <Compile Include="Assets\Scripts\HeadStatus.cs" />
      <Compile Include="Assets\Scripts\Inputs.cs" />
+     <Compile Include="Assets\Scripts\Knockback.cs" />
      <Compile Include="Assets\Scripts\Laser.cs" />
      <Compile Include="Assets\Scripts\MouseLook.cs" />
      <Compile Include="Assets\Scripts\Move.cs" />
