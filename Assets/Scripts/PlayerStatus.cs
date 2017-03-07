@@ -33,5 +33,6 @@ public class PlayerStatus : Status {
 		audioSource.Play();
 
 		Destroy(eyeLight);
+		Destroy(this);
 	}
 }

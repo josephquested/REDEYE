@@ -5,6 +5,7 @@ using UnityEngine;
 public class Laser : MonoBehaviour {
 	public GameObject tailPrefab;
 	public float spawnDelay;
+	public ParticleSystem explosionParticles;
 
 	bool canSpawnTail = true;
 
@@ -34,6 +35,15 @@ public class Laser : MonoBehaviour {
 		if (collider.gameObject.GetComponent<Status>() != null)
 		{
 			collider.gameObject.GetComponent<Status>().Damage(1);
+			StartCoroutine(ExplodeRoutine());
 		}
+	}
+
+	IEnumerator ExplodeRoutine ()
+	{
+		GetComponent<Rigidbody>().velocity = Vector3.zero;
+		explosionParticles.Play();
+		yield return new WaitForSeconds(0.2f);
+		Destroy(gameObject);
 	}
 }
