@@ -49,6 +49,7 @@ public class Laser : NetworkBehaviour {
 
 	IEnumerator ExplodeRoutine ()
 	{
+		GetComponent<Collider>().enabled = false;
 		GetComponent<Rigidbody>().velocity = Vector3.zero;
 		explosionParticles.Play();
 		yield return new WaitForSeconds(0.5f);

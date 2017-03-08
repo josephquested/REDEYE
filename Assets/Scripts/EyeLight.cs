@@ -35,5 +35,11 @@ public class EyeLight : MonoBehaviour {
 				lit = true;
 			}
 		}
+
+		else
+		{
+			lit = true;
+			eyeLight.intensity = 8f;
+		}
 	}
 }

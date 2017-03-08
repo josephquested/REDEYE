@@ -53,7 +53,6 @@
      <Compile Include="Assets\Scripts\EyeLight.cs" />
      <Compile Include="Assets\Scripts\Gun.cs" />
      <Compile Include="Assets\Scripts\Halflife.cs" />
-     <Compile Include="Assets\Scripts\HeadStatus.cs" />
      <Compile Include="Assets\Scripts\Inputs.cs" />
      <Compile Include="Assets\Scripts\Knockback.cs" />
      <Compile Include="Assets\Scripts\Laser.cs" />

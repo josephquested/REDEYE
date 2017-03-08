@@ -1,41 +1,54 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Networking;
 using UnityEngine;
 
 public class PlayerStatus : Status {
-	public bool damaged;
-	public bool dead;
 	public AudioClip dieSound;
 	public GameObject eyeLight;
 
+	[SyncVar]
+	public bool damaged;
+
 	public override void Damage (int damage)
 	{
-		if (!dead)
+		if (!isServer)
+    {
+	    return;
+    }
+
+		if (damage > 1 || damaged)
 		{
-			if (damage > 1 || damaged)
-			{
-				Die();
-			}
-			else
-			{
-				damaged = true;
-			}
+			Die();
+		}
+		else
+		{
+			damaged = true;
 		}
 	}
 
 	public void Die ()
 	{
-		dead = true;
-
-		Destroy(GetComponent<Inputs>());
-		Destroy(GetComponent<Move>());
-		Destroy(GetComponent<Knockback>());
-	 	GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+		if (!isServer)
+    {
+	    return;
+    }
 
 		AudioSource audioSource = GetComponent<AudioSource>();
 		audioSource.clip = dieSound;
 		audioSource.Play();
+		damaged = false;
+		RpcRespawn();
+	}
 
-		Destroy(eyeLight);
+	[ClientRpc]
+	void RpcRespawn()
+	{
+    if (isLocalPlayer)
+    {
+      transform.position = Vector3.zero;
+			print("damaged:");
+			print(damaged);
+    }
 	}
 }
