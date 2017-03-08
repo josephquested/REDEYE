@@ -92,6 +92,8 @@
 'Assets/Scripts/MouseLook.cs'
 'Assets/Scripts/Move.cs'
 'Assets/Scripts/NetworkCamera.cs'
+'Assets/Scripts/NetworkSpawner.cs'
+'Assets/Scripts/NetworkStatus.cs'
 'Assets/Scripts/PlayerStatus.cs'
 'Assets/Scripts/Status.cs'
 -r:'/Applications/Unity/Unity.app/Contents/MonoBleedingEdge/lib/mono/unity/System.Runtime.Serialization.dll'
