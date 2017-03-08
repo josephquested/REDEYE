@@ -1,18 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Networking;
 using UnityEngine;
 
-public class Gun : MonoBehaviour {
+public class Gun : NetworkBehaviour {
 	AudioSource audioSource;
 	Animator animator;
 	ParticleSystem particles;
 	Light lightSource;
 	CameraShake cameraShake;
-	Rigidbody parentRb;
-	NetworkUtility networkUtility;
+	Rigidbody rb;
 
 	bool heating;
 
+	public GameObject gun;
 	public GameObject laserPrefab;
 	public Transform laserSpawn;
 	public float heat;
@@ -22,13 +23,12 @@ public class Gun : MonoBehaviour {
 
 	void Start ()
 	{
-		audioSource = GetComponent<AudioSource>();
-		animator = GetComponent<Animator>();
-		lightSource = GetComponentsInChildren<Light>()[0];
-		cameraShake = transform.parent.GetComponentsInChildren<CameraShake>()[0];
-		particles = transform.parent.GetComponentsInChildren<ParticleSystem>()[0];
-		parentRb = transform.parent.gameObject.GetComponent<Rigidbody>();
-		networkUtility = transform.parent.gameObject.GetComponent<NetworkUtility>();
+		rb = GetComponent<Rigidbody>();
+		animator = gun.GetComponent<Animator>();
+		audioSource = gun.GetComponent<AudioSource>();
+		lightSource = gun.GetComponentsInChildren<Light>()[0];
+		cameraShake = GetComponentsInChildren<CameraShake>()[0];
+		particles = GetComponentsInChildren<ParticleSystem>()[0];
 	}
 
 	void Update ()
@@ -75,16 +75,17 @@ public class Gun : MonoBehaviour {
 		if (heat >= 0.99f)
 		{
 			animator.SetTrigger("fire");
-			Fire();
+			CmdFire();
 		}
 	}
 
-	void Fire ()
+	[Command]
+	void CmdFire ()
 	{
 		GameObject laser = (GameObject)Instantiate(laserPrefab, laserSpawn.position, laserSpawn.rotation);
 		laser.GetComponent<Rigidbody>().velocity = laser.transform.forward * laserSpeed;
 		laserSpawn.gameObject.GetComponent<AudioSource>().Play();
-		networkUtility.SpawnLaser(laser);
+		NetworkServer.Spawn(laser);
 		Recoil();
 	}
 
@@ -118,7 +119,7 @@ public class Gun : MonoBehaviour {
 
 	void Recoil ()
 	{
-		Vector3 force = -parentRb.gameObject.transform.forward;
-		parentRb.AddForce(force * recoil);
+		Vector3 force = -rb.gameObject.transform.forward;
+		rb.AddForce(force * recoil);
 	}
 }
