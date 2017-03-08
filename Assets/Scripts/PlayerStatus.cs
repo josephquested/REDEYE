@@ -46,6 +46,7 @@ public class PlayerStatus : Status {
 	{
     if (isLocalPlayer)
     {
+			GetComponent<Rigidbody>().velocity = Vector3.zero;
       transform.position = Vector3.zero;
 			print("damaged:");
 			print(damaged);
