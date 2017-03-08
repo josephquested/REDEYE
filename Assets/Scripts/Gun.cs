@@ -75,15 +75,15 @@ public class Gun : NetworkBehaviour {
 		if (heat >= 0.99f)
 		{
 			animator.SetTrigger("fire");
-			CmdFire();
+			CmdFire(transform.forward);
 		}
 	}
 
 	[Command]
-	void CmdFire ()
+	void CmdFire (Vector3 direction)
 	{
 		GameObject laser = (GameObject)Instantiate(laserPrefab, laserSpawn.position, laserSpawn.rotation);
-		laser.GetComponent<Rigidbody>().velocity = laser.transform.forward * laserSpeed;
+		laser.GetComponent<Rigidbody>().velocity = direction * laserSpeed;
 		laserSpawn.gameObject.GetComponent<AudioSource>().Play();
 		NetworkServer.Spawn(laser);
 		Recoil();
