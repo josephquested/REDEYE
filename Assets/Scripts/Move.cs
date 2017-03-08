@@ -19,7 +19,14 @@ public class Move : NetworkBehaviour {
 		{
 			return;
 		}
+
 		Vector3 movement = new Vector3(horizontal, 0, vertical);
+
+		if (horizontal != 0 && vertical!= 0)
+		{
+			movement = movement * 0.75f;
+		}
+
 		Movement(movement);
 	}
 
