@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class Laser : MonoBehaviour {
+public class Laser : NetworkBehaviour {
 	public GameObject tailPrefab;
 	public float spawnDelay;
 	public float knockback;

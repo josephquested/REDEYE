@@ -81,7 +81,7 @@ public class Gun : MonoBehaviour {
 
 	void Fire ()
 	{
-		var laser = (GameObject)Instantiate(laserPrefab, laserSpawn.position, laserSpawn.rotation);
+		GameObject laser = (GameObject)Instantiate(laserPrefab, laserSpawn.position, laserSpawn.rotation);
 		laser.GetComponent<Rigidbody>().velocity = laser.transform.forward * laserSpeed;
 		laserSpawn.gameObject.GetComponent<AudioSource>().Play();
 		networkUtility.SpawnLaser(laser);

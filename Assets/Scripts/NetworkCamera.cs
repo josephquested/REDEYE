@@ -9,6 +9,7 @@ public class NetworkCamera : MonoBehaviour {
 		if(!networkUtility.local)
 		{
 			GetComponent<Camera>().enabled = false;
+			GetComponent<AudioListener>().enabled = false;
 			return;
 		}
 	}

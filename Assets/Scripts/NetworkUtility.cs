@@ -16,8 +16,11 @@ public class NetworkUtility : NetworkBehaviour {
 
 	public void SpawnLaser (GameObject laser)
 	{
-		print(laser);
-		CmdSpawnLaser(laser);
+		if (local)
+		{
+			print(laser);
+			CmdSpawnLaser(laser);
+		}
 	}
 
 	[Command]
