@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class NetworkCamera : MonoBehaviour {
-	public NetworkStatus parentNetworkStatus;
+	public NetworkUtility networkUtility;
 
 	void Start () {
-		if(!parentNetworkStatus.local)
+		if(!networkUtility.local)
 		{
 			GetComponent<Camera>().enabled = false;
 			return;

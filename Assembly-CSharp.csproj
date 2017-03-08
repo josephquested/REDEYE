@@ -60,8 +60,7 @@
      <Compile Include="Assets\Scripts\MouseLook.cs" />
      <Compile Include="Assets\Scripts\Move.cs" />
      <Compile Include="Assets\Scripts\NetworkCamera.cs" />
-     <Compile Include="Assets\Scripts\NetworkSpawner.cs" />
-     <Compile Include="Assets\Scripts\NetworkStatus.cs" />
+     <Compile Include="Assets\Scripts\NetworkUtility.cs" />
      <Compile Include="Assets\Scripts\PlayerStatus.cs" />
      <Compile Include="Assets\Scripts\Status.cs" />
      <None Include="Assets\Materials\Glass Shaders\Double Sided Glass Reflection (Advanced) Old.shader" />

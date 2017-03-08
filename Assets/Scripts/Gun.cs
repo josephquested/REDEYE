@@ -9,7 +9,7 @@ public class Gun : MonoBehaviour {
 	Light lightSource;
 	CameraShake cameraShake;
 	Rigidbody parentRb;
-	NetworkSpawner networkSpawner;
+	NetworkUtility networkUtility;
 
 	bool heating;
 
@@ -28,7 +28,7 @@ public class Gun : MonoBehaviour {
 		cameraShake = transform.parent.GetComponentsInChildren<CameraShake>()[0];
 		particles = transform.parent.GetComponentsInChildren<ParticleSystem>()[0];
 		parentRb = transform.parent.gameObject.GetComponent<Rigidbody>();
-		networkSpawner = GameObject.FindWithTag("NetworkUtility").GetComponent<NetworkSpawner>();
+		networkUtility = transform.parent.gameObject.GetComponent<NetworkUtility>();
 	}
 
 	void Update ()
@@ -84,7 +84,7 @@ public class Gun : MonoBehaviour {
 		var laser = (GameObject)Instantiate(laserPrefab, laserSpawn.position, laserSpawn.rotation);
 		laser.GetComponent<Rigidbody>().velocity = laser.transform.forward * laserSpeed;
 		laserSpawn.gameObject.GetComponent<AudioSource>().Play();
-		networkSpawner.SpawnLaser(laser);
+		networkUtility.SpawnLaser(laser);
 		Recoil();
 	}
 
