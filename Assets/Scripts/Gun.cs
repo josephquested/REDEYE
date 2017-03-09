@@ -6,7 +6,6 @@ using UnityEngine;
 public class Gun : NetworkBehaviour {
 	AudioSource audioSource;
 	Animator animator;
-	ParticleSystem particles;
 	Light lightSource;
 	CameraShake cameraShake;
 	Rigidbody rb;
@@ -17,8 +16,7 @@ public class Gun : NetworkBehaviour {
 	public GameObject gun;
 	public GameObject laserPrefab;
 	public Transform laserSpawn;
-	public Transform particleSpawn;
-	public GameObject particlePrefab;
+	public ParticleSystem gunParticles;
 
 	[SyncVar]
 	public float heat;
@@ -34,7 +32,6 @@ public class Gun : NetworkBehaviour {
 		audioSource = gun.GetComponent<AudioSource>();
 		lightSource = gun.GetComponentsInChildren<Light>()[0];
 		cameraShake = GetComponentsInChildren<CameraShake>()[0];
-		CmdSpawnParticles();
 	}
 
 	void Update ()
@@ -42,13 +39,13 @@ public class Gun : NetworkBehaviour {
 		UpdateAudio();
 		UpdateLight();
 		UpdateCameraShake();
-		UpdateParticles();
 	}
 
 	public void ReceiveInput (bool shouldHeat)
 	{
 		if (shouldHeat)
 		{
+			CmdParticles(true);
 			heating = true;
 
 			if (heat < 1)
@@ -78,6 +75,7 @@ public class Gun : NetworkBehaviour {
 
 	public void AttemptFire ()
 	{
+		CmdParticles(false);
 		if (heat >= 0.99f)
 		{
 			animator.SetTrigger("fire");
@@ -96,12 +94,25 @@ public class Gun : NetworkBehaviour {
 	}
 
 	[Command]
-	void CmdSpawnParticles ()
+	void CmdParticles (bool active)
 	{
-		GameObject particleObj = (GameObject)Instantiate(particlePrefab, particleSpawn.position, particleSpawn.rotation);
-		particleObj.transform.parent = particleSpawn;
-		particles = particleObj.GetComponent<ParticleSystem>();
-		NetworkServer.Spawn(particleObj);
+		RpcParticles(active);
+	}
+
+	[ClientRpc]
+	void RpcParticles(bool active)
+	{
+    if (isLocalPlayer)
+    {
+			if (active)
+			{
+				gunParticles.Play();
+			}
+			else
+			{
+				gunParticles.Stop();
+			}
+    }
 	}
 
 	void UpdateCameraShake ()
@@ -118,18 +129,6 @@ public class Gun : NetworkBehaviour {
 	void UpdateLight ()
 	{
 		lightSource.range = heat * 3;
-	}
-
-	void UpdateParticles ()
-	{
-		if (heat > 0.5 && heating)
-		{
-			particles.Play();
-		}
-		else
-		{
-			particles.Stop();
-		}
 	}
 
 	void Recoil ()
