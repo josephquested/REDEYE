@@ -102,8 +102,8 @@ public class Gun : NetworkBehaviour {
 	[ClientRpc]
 	void RpcParticles(bool active)
 	{
-    if (isLocalPlayer)
-    {
+    // if (isLocalPlayer)
+    // {
 			if (active)
 			{
 				gunParticles.Play();
@@ -112,7 +112,7 @@ public class Gun : NetworkBehaviour {
 			{
 				gunParticles.Stop();
 			}
-    }
+    // }
 	}
 
 	void UpdateCameraShake ()
