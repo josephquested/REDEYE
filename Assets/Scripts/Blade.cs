@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Blade : MonoBehaviour {
 	Animator animator;
-	Rigidbody parentRb;
+	Rigidbody rb;
 	AudioSource audioSource;
 	ParticleSystem particles;
 	CameraShake cameraShake;
 
+	public GameObject blade;
 	public float heat;
 	public float heatSpeed;
 	public float thrust;
@@ -18,11 +19,11 @@ public class Blade : MonoBehaviour {
 
 	void Start ()
 	{
-		particles = GetComponentsInChildren<ParticleSystem>()[0];
-		audioSource = GetComponent<AudioSource>();
-		parentRb = transform.parent.gameObject.GetComponent<Rigidbody>();
+		particles = blade.GetComponentsInChildren<ParticleSystem>()[0];
+		audioSource = blade.GetComponent<AudioSource>();
+		rb = GetComponent<Rigidbody>();
 		animator = GetComponent<Animator>();
-		cameraShake = transform.parent.GetComponentsInChildren<CameraShake>()[0];
+		cameraShake = GetComponentsInChildren<CameraShake>()[0];
 	}
 
 	void Update ()
@@ -76,7 +77,7 @@ public class Blade : MonoBehaviour {
 	{
 		firing = true;
 		audioSource.Play();
-		parentRb.AddForce(transform.parent.forward * thrust);
+		rb.AddForce(transform.forward * thrust);
 		yield return new WaitForSeconds(cooldown);
 		firing = false;
 	}
@@ -89,7 +90,7 @@ public class Blade : MonoBehaviour {
 			collider.gameObject.GetComponent<Knockback>().ReceiveKnockback(direction, knockback);
 		}
 		collider.gameObject.GetComponent<Status>().Damage(2);
-		parentRb.velocity = Vector3.zero;
+		rb.velocity = Vector3.zero;
 	}
 
 	void UpdateParticles ()

@@ -36,8 +36,8 @@ public class Gun : NetworkBehaviour {
 
 	void Update ()
 	{
+		CmdLight();
 		UpdateAudio();
-		UpdateLight();
 		UpdateCameraShake();
 	}
 
@@ -73,6 +73,8 @@ public class Gun : NetworkBehaviour {
 		}
 	}
 
+	// FIRING //
+
 	public void AttemptFire ()
 	{
 		CmdParticles(false);
@@ -93,6 +95,14 @@ public class Gun : NetworkBehaviour {
 		Recoil();
 	}
 
+	void Recoil ()
+	{
+		Vector3 force = -rb.gameObject.transform.forward;
+		rb.AddForce(force * recoil);
+	}
+
+	// PARTICLES //
+
 	[Command]
 	void CmdParticles (bool active)
 	{
@@ -100,20 +110,33 @@ public class Gun : NetworkBehaviour {
 	}
 
 	[ClientRpc]
-	void RpcParticles(bool active)
+	void RpcParticles (bool active)
 	{
-    // if (isLocalPlayer)
-    // {
-			if (active)
-			{
-				gunParticles.Play();
-			}
-			else
-			{
-				gunParticles.Stop();
-			}
-    // }
+		if (active)
+		{
+			gunParticles.Play();
+		}
+		else
+		{
+			gunParticles.Stop();
+		}
 	}
+
+	// LIGHT //
+
+	[Command]
+	void CmdLight ()
+	{
+		RpcLight();
+	}
+
+	[ClientRpc]
+	void RpcLight ()
+	{
+		lightSource.range = heat * 3;
+	}
+
+	// AUDIO AND VISUAL
 
 	void UpdateCameraShake ()
 	{
@@ -124,16 +147,5 @@ public class Gun : NetworkBehaviour {
 	{
 		audioSource.volume = heat;
 		audioSource.pitch = heat * 3;
-	}
-
-	void UpdateLight ()
-	{
-		lightSource.range = heat * 3;
-	}
-
-	void Recoil ()
-	{
-		Vector3 force = -rb.gameObject.transform.forward;
-		rb.AddForce(force * recoil);
 	}
 }
