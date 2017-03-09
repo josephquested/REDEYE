@@ -11,11 +11,6 @@ public class Laser : NetworkBehaviour {
 
 	bool canSpawnTail = true;
 
-	void Start ()
-	{
-		Destroy(gameObject, 10);
-	}
-
 	void Update ()
 	{
 		if (canSpawnTail)

@@ -21,6 +21,7 @@ public class Inputs : NetworkBehaviour {
 		{
 	    return;
 		}
+		
 		MovementInput();
 		FireInput();
 		BladeInput();

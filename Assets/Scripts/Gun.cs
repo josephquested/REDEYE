@@ -11,12 +11,18 @@ public class Gun : NetworkBehaviour {
 	CameraShake cameraShake;
 	Rigidbody rb;
 
+	[SyncVar]
 	bool heating;
 
 	public GameObject gun;
 	public GameObject laserPrefab;
 	public Transform laserSpawn;
+	public Transform particleSpawn;
+	public GameObject particlePrefab;
+
+	[SyncVar]
 	public float heat;
+
 	public float heatSpeed;
 	public float laserSpeed;
 	public float recoil;
@@ -28,7 +34,7 @@ public class Gun : NetworkBehaviour {
 		audioSource = gun.GetComponent<AudioSource>();
 		lightSource = gun.GetComponentsInChildren<Light>()[0];
 		cameraShake = GetComponentsInChildren<CameraShake>()[0];
-		particles = GetComponentsInChildren<ParticleSystem>()[0];
+		CmdSpawnParticles();
 	}
 
 	void Update ()
@@ -87,6 +93,15 @@ public class Gun : NetworkBehaviour {
 		laserSpawn.gameObject.GetComponent<AudioSource>().Play();
 		NetworkServer.Spawn(laser);
 		Recoil();
+	}
+
+	[Command]
+	void CmdSpawnParticles ()
+	{
+		GameObject particleObj = (GameObject)Instantiate(particlePrefab, particleSpawn.position, particleSpawn.rotation);
+		particleObj.transform.parent = particleSpawn;
+		particles = particleObj.GetComponent<ParticleSystem>();
+		NetworkServer.Spawn(particleObj);
 	}
 
 	void UpdateCameraShake ()
