@@ -46,29 +46,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Ball.cs" />
-     <Compile Include="Assets\Scripts\Blade.cs" />
-     <Compile Include="Assets\Scripts\BladeTip.cs" />
-     <Compile Include="Assets\Scripts\CameraShake.cs" />
-     <Compile Include="Assets\Scripts\EyeLight.cs" />
-     <Compile Include="Assets\Scripts\Gun.cs" />
-     <Compile Include="Assets\Scripts\Halflife.cs" />
+     <Compile Include="Assets\Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\Inputs.cs" />
-     <Compile Include="Assets\Scripts\Laser.cs" />
-     <Compile Include="Assets\Scripts\MouseLook.cs" />
-     <Compile Include="Assets\Scripts\Move.cs" />
-     <Compile Include="Assets\Scripts\NetworkCamera.cs" />
-     <Compile Include="Assets\Scripts\NetworkUtility.cs" />
-     <Compile Include="Assets\Scripts\PlayerStatus.cs" />
-     <Compile Include="Assets\Scripts\Status.cs" />
-     <None Include="Assets\Materials\Glass Shaders\Double Sided Glass Reflection (Advanced) Old.shader" />
-     <None Include="Assets\Materials\Glass Shaders\Glass (Fast).shader" />
-     <None Include="Assets\Materials\Glass Shaders\Glass Reflection (Advanced).shader" />
-     <None Include="Assets\Materials\Glass Shaders\Glass Reflection (Advanced) Old.shader" />
-     <None Include="Assets\Materials\Glass Shaders\Glass (Advanced).shader" />
-     <None Include="Assets\Materials\Glass Shaders\Double Sided Glass (Fast).shader" />
-     <None Include="Assets\Materials\Glass Shaders\Double Sided Glass Reflection (Advanced).shader" />
-     <None Include="Assets\Materials\Glass Shaders\Double Sided Glass (Advanced).shader" />
+     <Compile Include="Assets\Scripts\Movement.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
