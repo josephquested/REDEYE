@@ -4,11 +4,18 @@ using UnityEngine.Networking;
 using UnityEngine;
 
 public class PlayerStatus : Status {
+	Rigidbody rb;
+
 	public AudioClip dieSound;
 	public GameObject eyeLight;
 
 	[SyncVar]
 	public bool damaged;
+
+	void Start ()
+	{
+		rb = GetComponent<Rigidbody>();
+	}
 
 	public override void Damage (int damage)
 	{
@@ -25,6 +32,11 @@ public class PlayerStatus : Status {
 		{
 			damaged = true;
 		}
+	}
+
+	public override void Knockback (Vector3 direction, float force)
+	{
+		rb.AddForce(direction * force);
 	}
 
 	public void Die ()

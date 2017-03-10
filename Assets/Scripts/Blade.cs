@@ -84,12 +84,10 @@ public class Blade : MonoBehaviour {
 
 	public void Strike (Collider collider)
 	{
-		if (collider.gameObject.GetComponent<Knockback>() != null)
-		{
-			Vector3 direction = transform.parent.forward;
-			collider.gameObject.GetComponent<Knockback>().ReceiveKnockback(direction, knockback);
-		}
-		collider.gameObject.GetComponent<Status>().Damage(2);
+		Status status = collider.gameObject.GetComponent<Status>();
+		Vector3 direction = transform.parent.forward;
+		status.Damage(2);
+		status.Knockback(direction, knockback);
 		rb.velocity = Vector3.zero;
 	}
 

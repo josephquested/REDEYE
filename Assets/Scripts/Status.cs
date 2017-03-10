@@ -8,4 +8,9 @@ public class Status : NetworkBehaviour {
 	{
 		// override
 	}
+
+	public virtual void Knockback (Vector3 direction, float force)
+	{
+		// override
+	}
 }

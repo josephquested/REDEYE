@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Gun : NetworkBehaviour {
 	AudioSource audioSource;
-	Animator animator;
+	NetworkAnimator animator;
 	Light lightSource;
 	CameraShake cameraShake;
 	Rigidbody rb;
@@ -28,7 +28,7 @@ public class Gun : NetworkBehaviour {
 	void Start ()
 	{
 		rb = GetComponent<Rigidbody>();
-		animator = gun.GetComponent<Animator>();
+		animator = GetComponent<NetworkAnimator>();
 		audioSource = gun.GetComponent<AudioSource>();
 		lightSource = gun.GetComponentsInChildren<Light>()[0];
 		cameraShake = GetComponentsInChildren<CameraShake>()[0];
@@ -80,7 +80,7 @@ public class Gun : NetworkBehaviour {
 		CmdParticles(false);
 		if (heat >= 0.99f)
 		{
-			animator.SetTrigger("fire");
+			animator.SetTrigger("gun-fire");
 			CmdFire(transform.forward);
 		}
 	}

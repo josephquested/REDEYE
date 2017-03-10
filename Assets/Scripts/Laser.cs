@@ -29,15 +29,12 @@ public class Laser : NetworkBehaviour {
 
 	void OnTriggerEnter (Collider collider)
 	{
-		if (collider.gameObject.GetComponent<Knockback>() != null)
-		{
-			Vector3 direction = GetComponent<Rigidbody>().velocity;
-			collider.gameObject.GetComponent<Knockback>().ReceiveKnockback(direction, knockback);
-		}
-
 		if (collider.gameObject.GetComponent<Status>() != null)
 		{
-			collider.gameObject.GetComponent<Status>().Damage(1);
+			Status status = collider.gameObject.GetComponent<Status>();
+			Vector3 direction = GetComponent<Rigidbody>().velocity;
+			status.Damage(1);
+			status.Knockback(direction, knockback);
 			StartCoroutine(ExplodeRoutine());
 		}
 	}
