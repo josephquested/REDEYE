@@ -6,8 +6,10 @@ public class Gun : MonoBehaviour {
 	Animator animator;
 	Light gunLight;
 	ParticleSystem gunParticles;
+	AudioSource gunFireAudio;
 
 	public GameObject gun;
+	public AudioSource gunRumbleAudio;
 	public Shake shake;
 	public GameObject laserPrefab;
 	public Transform laserSpawn;
@@ -22,6 +24,7 @@ public class Gun : MonoBehaviour {
 		animator = GetComponent<Animator>();
 		gunLight = gun.GetComponentInChildren<Light>();
 		gunParticles = gun.GetComponentInChildren<ParticleSystem>();
+		gunFireAudio = gun.GetComponent<AudioSource>();
 	}
 
 	void Update ()
@@ -29,6 +32,7 @@ public class Gun : MonoBehaviour {
 		Cool();
 		UpdateLight();
 		UpdateShake();
+		UpdateAudio();
 		UpdateParticles();
 	}
 
@@ -69,11 +73,18 @@ public class Gun : MonoBehaviour {
 		GameObject laser = (GameObject)Instantiate(laserPrefab, laserSpawn.position, laserSpawn.rotation);
 		laser.GetComponent<Rigidbody>().AddForce(transform.forward * laserSpeed);
 		animator.SetTrigger("gun-fire");
+		gunFireAudio.Play();
 	}
 
 	void UpdateLight ()
 	{
 		gunLight.range = heat * 3;
+	}
+
+	void UpdateAudio ()
+	{
+		gunRumbleAudio.volume = heat;
+		gunRumbleAudio.pitch = heat * 3;
 	}
 
 	void UpdateParticles ()
