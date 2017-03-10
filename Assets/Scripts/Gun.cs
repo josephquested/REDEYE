@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour {
 	public GameObject laserPrefab;
+	public Transform laserSpawn;
 	public float laserSpeed;
 	public float heatSpeed;
 	public float coolSpeed;
@@ -46,6 +47,15 @@ public class Gun : MonoBehaviour {
 
 	public void AttemptFire ()
 	{
-		print("attempt fire!");
+		if (heat >= 0.95f)
+		{
+			Fire();
+		}
+	}
+
+	void Fire ()
+	{
+		GameObject laser = (GameObject)Instantiate(laserPrefab, laserSpawn.position, laserSpawn.rotation);
+		laser.GetComponent<Rigidbody>().AddForce(transform.forward * laserSpeed);
 	}
 }
