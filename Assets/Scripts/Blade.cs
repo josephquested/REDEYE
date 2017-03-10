@@ -37,7 +37,7 @@ public class Blade : MonoBehaviour {
 	{
 		if (shouldHeat)
 		{
-			animator.SetBool("heating", true);
+			animator.SetBool("blade-heating", true);
 
 			if (heat < 1)
 			{
@@ -51,7 +51,7 @@ public class Blade : MonoBehaviour {
 
 		else
 		{
-			animator.SetBool("heating", false);
+			animator.SetBool("blade-heating", false);
 
 			if (heat > 0)
 			{
@@ -68,7 +68,7 @@ public class Blade : MonoBehaviour {
 	{
 		if (heat >= 0.99f && !firing)
 		{
-			animator.SetTrigger("fire");
+			animator.SetTrigger("blade-fire");
 			StartCoroutine(FireRoutine());
 		}
 	}
@@ -114,11 +114,11 @@ public class Blade : MonoBehaviour {
 	{
 		if (heat >= 0.99)
 		{
-			animator.SetBool("hot", true);
+			animator.SetBool("blade-hot", true);
 		}
 		else
 		{
-			animator.SetBool("hot", false);
+			animator.SetBool("blade-hot", false);
 		}
 	}
 }
