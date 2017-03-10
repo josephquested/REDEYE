@@ -5,8 +5,10 @@ using UnityEngine;
 public class Gun : MonoBehaviour {
 	Animator animator;
 	Light gunLight;
+	ParticleSystem gunParticles;
 
 	public GameObject gun;
+	public Shake shake;
 	public GameObject laserPrefab;
 	public Transform laserSpawn;
 	public float laserSpeed;
@@ -19,12 +21,15 @@ public class Gun : MonoBehaviour {
 	{
 		animator = GetComponent<Animator>();
 		gunLight = gun.GetComponentInChildren<Light>();
+		gunParticles = gun.GetComponentInChildren<ParticleSystem>();
 	}
 
 	void Update ()
 	{
 		Cool();
 		UpdateLight();
+		UpdateShake();
+		UpdateParticles();
 	}
 
 	void Cool ()
@@ -69,5 +74,22 @@ public class Gun : MonoBehaviour {
 	void UpdateLight ()
 	{
 		gunLight.range = heat * 3;
+	}
+
+	void UpdateParticles ()
+	{
+		if (heat > 0.5f)
+		{
+			gunParticles.Play();
+		}
+		else
+		{
+			gunParticles.Stop();
+		}
+	}
+
+	void UpdateShake ()
+	{
+		shake.ReceiveInput(heat);
 	}
 }
