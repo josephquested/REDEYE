@@ -5,16 +5,19 @@ using UnityEngine;
 public class Inputs : MonoBehaviour {
 	Movement movement;
 	Gun gun;
+	Blade blade;
 
 	void Start ()
 	{
 		movement = GetComponent<Movement>();
 		gun = GetComponent<Gun>();
+		blade = GetComponent<Blade>();
 	}
 
 	void Update ()
 	{
 		GunInput();
+		BladeInput();
 	}
 
 	void FixedUpdate ()
@@ -36,6 +39,16 @@ public class Inputs : MonoBehaviour {
 		if (Input.GetButtonUp("Fire2"))
 		{
 			gun.AttemptFire();
+		}
+	}
+
+	void BladeInput ()
+	{
+		blade.Heat(Input.GetButton("Fire1"));
+
+		if (Input.GetButtonUp("Fire1"))
+		{
+			blade.AttemptFire();
 		}
 	}
 }
