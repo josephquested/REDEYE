@@ -7,6 +7,7 @@ public class Gun : MonoBehaviour {
 	Light gunLight;
 	ParticleSystem gunParticles;
 	AudioSource gunFireAudio;
+	Rigidbody rb;
 
 	public GameObject gun;
 	public AudioSource gunRumbleAudio;
@@ -16,11 +17,13 @@ public class Gun : MonoBehaviour {
 	public float laserSpeed;
 	public float heatSpeed;
 	public float coolSpeed;
+	public float recoil;
 
 	public float heat;
 
 	void Start ()
 	{
+		rb = GetComponent<Rigidbody>();
 		animator = GetComponent<Animator>();
 		gunLight = gun.GetComponentInChildren<Light>();
 		gunParticles = gun.GetComponentInChildren<ParticleSystem>();
@@ -80,6 +83,7 @@ public class Gun : MonoBehaviour {
 		laser.GetComponent<Rigidbody>().AddForce(transform.forward * laserSpeed);
 		animator.SetTrigger("gun-fire");
 		gunFireAudio.Play();
+		Recoil();
 	}
 
 	void UpdateLight ()
@@ -108,5 +112,10 @@ public class Gun : MonoBehaviour {
 	void UpdateShake ()
 	{
 		shake.ReceiveInput(heat);
+	}
+
+	void Recoil ()
+	{
+		rb.AddForce(-transform.forward * recoil);
 	}
 }
