@@ -8,7 +8,7 @@ public class Movement : MonoBehaviour {
 	public AudioSource ballAudio;
 	public float speed;
 
-	void Start ()
+	void Awake ()
 	{
 		rb = GetComponent<Rigidbody>();
 	}
