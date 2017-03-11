@@ -93,8 +93,8 @@ public class Gun : MonoBehaviour {
 
 	void UpdateAudio ()
 	{
-		gunRumbleAudio.volume = heat;
-		gunRumbleAudio.pitch = heat * 3;
+		gunRumbleAudio.volume = heat / 2;
+		gunRumbleAudio.pitch = heat * 4;
 	}
 
 	void UpdateParticles ()

@@ -94,14 +94,21 @@ public class BoardCreator : MonoBehaviour
                 corridors[i].SetupCorridor(rooms[i], corridorLength, roomWidth, roomHeight, columns, rows, false);
             }
 
-            if (i == rooms.Length *.5f)
-            {
-                // Vector3 playerPos = new Vector3 (rooms[i].xPos, rooms[i].yPos, 0);
-                Vector3 playerPos = new Vector3 (rooms[i].xPos, 0, rooms[i].yPos);
-                Instantiate(player, playerPos, Quaternion.identity);
-            }
+            // if (i == rooms.Length *.5f)
+            // {
+            //     // Vector3 playerPos = new Vector3 (rooms[i].xPos, rooms[i].yPos, 0);
+            //     Vector3 playerPos = new Vector3 (rooms[i].xPos, 0, rooms[i].yPos);
+            //     Instantiate(player, playerPos, Quaternion.identity);
+            // }
         }
 
+        SpawnPlayer(rooms[0]);
+    }
+
+    void SpawnPlayer (Room room)
+    {
+      Vector3 playerPos = new Vector3 (room.xPos, 0, room.yPos);
+      Instantiate(player, playerPos, Quaternion.identity);
     }
 
 

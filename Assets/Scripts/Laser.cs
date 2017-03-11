@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Laser : MonoBehaviour {
 	Light laserLight;
+	AudioSource laserAudio;
 
 	public GameObject tailPrefab;
 	public float cooldown;
@@ -13,6 +14,7 @@ public class Laser : MonoBehaviour {
 	{
 		StartCoroutine(TailRoutine());
 		laserLight = GetComponentInChildren<Light>();
+		laserAudio = GetComponentInChildren<AudioSource>();
 		StartCoroutine(FadeRoutine());
 	}
 
@@ -26,6 +28,7 @@ public class Laser : MonoBehaviour {
 	IEnumerator FadeRoutine ()
 	{
 		laserLight.range -= decay;
+		laserAudio.volume -= decay / 10;
 		yield return new WaitForSeconds(0.001f);
 		StartCoroutine(FadeRoutine());
 	}
