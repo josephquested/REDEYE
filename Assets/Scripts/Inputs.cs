@@ -32,14 +32,12 @@ public class Inputs : MonoBehaviour {
 
 	void GunInput ()
 	{
-		if (Input.GetButton("Fire2"))
-		{
-			gun.Heat();
-		}
 		if (Input.GetButtonUp("Fire2"))
 		{
 			gun.AttemptFire();
 		}
+
+		gun.Heat(Input.GetButton("Fire2"));
 	}
 
 	void BladeInput ()

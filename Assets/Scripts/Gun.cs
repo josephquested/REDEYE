@@ -29,7 +29,6 @@ public class Gun : MonoBehaviour {
 
 	void Update ()
 	{
-		Cool();
 		UpdateLight();
 		UpdateShake();
 		UpdateAudio();
@@ -48,15 +47,22 @@ public class Gun : MonoBehaviour {
 		}
 	}
 
-	public void Heat ()
+	public void Heat (bool shouldHeat)
 	{
-		if (heat >= 1)
+		if (shouldHeat)
 		{
-			heat = 1;
+			if (heat >= 1)
+			{
+				heat = 1;
+			}
+			else
+			{
+				heat += heatSpeed;
+			}
 		}
 		else
 		{
-			heat += heatSpeed;
+			Cool();
 		}
 	}
 

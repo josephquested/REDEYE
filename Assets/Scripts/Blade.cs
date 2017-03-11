@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class Blade : MonoBehaviour {
 	Animator animator;
+	Rigidbody rb;
 
 	public GameObject blade;
 	public float heatSpeed;
 	public float coolSpeed;
 	public float heat;
+	public float thrust;
 
 	void Start ()
 	{
+		rb = GetComponent<Rigidbody>();
 		animator = GetComponent<Animator>();
 	}
 
@@ -44,7 +47,6 @@ public class Blade : MonoBehaviour {
 				heat += heatSpeed;
 			}
 		}
-
 		else
 		{
 			Cool();
@@ -64,6 +66,12 @@ public class Blade : MonoBehaviour {
 	void Fire ()
 	{
 		animator.SetTrigger("blade-fire");
+		Thrust();
 		heat = 0;
+	}
+
+	void Thrust ()
+	{
+		rb.AddForce(transform.forward * thrust);
 	}
 }
