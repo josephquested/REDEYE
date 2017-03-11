@@ -44,11 +44,11 @@ public class Inputs : MonoBehaviour {
 
 	void BladeInput ()
 	{
-		blade.Heat(Input.GetButton("Fire1"));
-
 		if (Input.GetButtonUp("Fire1"))
 		{
 			blade.AttemptFire();
 		}
+
+		blade.Heat(Input.GetButton("Fire1"));
 	}
 }

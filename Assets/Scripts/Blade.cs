@@ -56,7 +56,6 @@ public class Blade : MonoBehaviour {
 		if (heat >= 0.95f)
 		{
 			Fire();
-			return;
 		}
 
 		animator.SetBool("blade-heat", false);
@@ -65,6 +64,6 @@ public class Blade : MonoBehaviour {
 	void Fire ()
 	{
 		animator.SetTrigger("blade-fire");
-		animator.SetBool("blade-heat", false);
+		heat = 0;
 	}
 }
