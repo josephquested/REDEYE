@@ -7,6 +7,7 @@ public class Laser : MonoBehaviour {
 	AudioSource laserAudio;
 
 	public GameObject tailPrefab;
+	public int damage;
 	public float cooldown;
 	public float decay;
 
@@ -31,5 +32,13 @@ public class Laser : MonoBehaviour {
 		laserAudio.volume -= decay / 20;
 		yield return new WaitForSeconds(0.001f);
 		StartCoroutine(FadeRoutine());
+	}
+
+	void OnTriggerEnter (Collider collider)
+	{
+		if (collider.gameObject.GetComponent<Health>() != null)
+		{
+			collider.gameObject.GetComponent<Health>().Damage(damage);
+		}
 	}
 }
