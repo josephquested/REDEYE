@@ -23,7 +23,7 @@ public class BoardCreator : MonoBehaviour
     private TileType[][] tiles;                               // A jagged array of tile types representing the board, like a grid.
     private Room[] rooms;                                     // All the rooms that are created for this board.
     private Corridor[] corridors;                             // All the corridors that connect the rooms.
-    private GameObject boardHolder;                           // GameObject that acts as a container for all other tiles.
+    public GameObject boardHolder;                           // GameObject that acts as a container for all other tiles.
 
 
     private void Start ()
@@ -41,6 +41,10 @@ public class BoardCreator : MonoBehaviour
         InstantiateTiles ();
         InstantiateOuterWalls ();
 
+        // Start populating the rooms
+        GetComponentInChildren<RoomController>().Init(rooms, boardHolder);
+
+        // Rotate the board up the right way
         boardHolder.transform.Rotate(Vector3.right * 90);
     }
 
