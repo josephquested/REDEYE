@@ -43,9 +43,6 @@ public class BoardCreator : MonoBehaviour
 
         // Start populating the rooms
         GetComponentInChildren<RoomController>().Init(rooms, boardHolder);
-
-        // Rotate the board up the right way
-        // boardHolder.transform.Rotate(Vector3.right * 90);
     }
 
     void SetupTilesArray ()
@@ -187,7 +184,7 @@ public class BoardCreator : MonoBehaviour
                 if (tiles[i][j] == TileType.Wall)
                 {
                     // ... instantiate a wall over the top.
-                    InstantiateFromArray (wallTiles, i, j);
+                    InstantiateWallFromArray (wallTiles, i, j);
                 }
             }
         }
@@ -221,7 +218,7 @@ public class BoardCreator : MonoBehaviour
         while (currentZ <= endingZ)
         {
             // ... instantiate an outer wall tile at the x coordinate and the current z coordinate.
-            InstantiateFromArray(outerWallTiles, xCoord, currentZ);
+            InstantiateWallFromArray(outerWallTiles, xCoord, currentZ);
 
             currentZ++;
         }
@@ -237,7 +234,7 @@ public class BoardCreator : MonoBehaviour
         while (currentX <= endingX)
         {
             // ... instantiate an outer wall tile at the z coordinate and the current x coordinate.
-            InstantiateFromArray(outerWallTiles, currentX, zCoord);
+            InstantiateWallFromArray(outerWallTiles, currentX, zCoord);
 
             currentX++;
         }
@@ -251,6 +248,21 @@ public class BoardCreator : MonoBehaviour
 
         // The position to be instantiated at is based on the coordinates.
         Vector3 position = new Vector3(xCoord, 0f, zCoord);
+
+        // Create an instance of the prefab from the random index of the array.
+        GameObject tileInstance = Instantiate(prefabs[randomIndex], position, Quaternion.identity) as GameObject;
+
+        // Set the tile's parent to the board holder.
+        tileInstance.transform.parent = boardHolder.transform;
+    }
+
+    void InstantiateWallFromArray (GameObject[] prefabs, float xCoord, float zCoord)
+    {
+        // Create a random index for the array.
+        int randomIndex = Random.Range(0, prefabs.Length);
+
+        // The position to be instantiated at is based on the coordinates.
+        Vector3 position = new Vector3(xCoord, 5f, zCoord);
 
         // Create an instance of the prefab from the random index of the array.
         GameObject tileInstance = Instantiate(prefabs[randomIndex], position, Quaternion.identity) as GameObject;

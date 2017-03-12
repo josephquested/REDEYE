@@ -8,7 +8,7 @@ public class RoomController : MonoBehaviour
 
   public int lightCount;
 
-  void Start ()
+  void Awake ()
   {
     store = GetComponent<Store>();
   }
@@ -31,9 +31,12 @@ public class RoomController : MonoBehaviour
 
   void PopulateLights (Room room)
   {
-    GameObject obj = store.smallLight;
-    Vector3 position = new Vector3 (room.xPos + room.roomWidth / 2, 0, room.zPos + room.roomHeight / 2);
-    Create(obj, position);
+    if (Random.Range(0, 4) == 0)
+    {
+      GameObject obj = store.smallLight;
+      Vector3 position = new Vector3 (room.xPos + room.roomWidth / 2, obj.transform.position.y, room.zPos + room.roomHeight / 2);
+      Create(obj, position);
+    }
   }
 
   void Create (GameObject obj, Vector3 position)
