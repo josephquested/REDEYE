@@ -9,7 +9,7 @@ public enum Direction
 public class Corridor
 {
     public int startXPos;         // The x coordinate for the start of the corridor.
-    public int startYPos;         // The y coordinate for the start of the corridor.
+    public int startZPos;         // The z coordinate for the start of the corridor.
     public int corridorLength;            // How many units long the corridor is.
     public Direction direction;   // Which direction the corridor is heading from it's room.
 
@@ -28,15 +28,15 @@ public class Corridor
     }
 
 
-    public int EndPositionY
+    public int EndPositionZ
     {
         get
         {
             if (direction == Direction.East || direction == Direction.West)
-                return startYPos;
+                return startZPos;
             if (direction == Direction.North)
-                return startYPos + corridorLength - 1;
-            return startYPos - corridorLength + 1;
+                return startZPos + corridorLength - 1;
+            return startZPos - corridorLength + 1;
         }
     }
 
@@ -80,24 +80,24 @@ public class Corridor
                 startXPos = Random.Range (room.xPos, room.xPos + room.roomWidth - 1);
 
                 // The starting position in the y axis must be the top of the room.
-                startYPos = room.yPos + room.roomHeight;
+                startZPos = room.zPos + room.roomHeight;
 
-                // The maximum length the corridor can be is the height of the board (rows) but from the top of the room (y pos + height).
-                maxLength = rows - startYPos - roomHeight.m_Min;
+                // The maximum length the corridor can be is the height of the board (rows) but from the top of the room (z pos + height).
+                maxLength = rows - startZPos - roomHeight.m_Min;
                 break;
             case Direction.East:
                 startXPos = room.xPos + room.roomWidth;
-                startYPos = Random.Range(room.yPos, room.yPos + room.roomHeight - 1);
+                startZPos = Random.Range(room.zPos, room.zPos + room.roomHeight - 1);
                 maxLength = columns - startXPos - roomWidth.m_Min;
                 break;
             case Direction.South:
                 startXPos = Random.Range (room.xPos, room.xPos + room.roomWidth);
-                startYPos = room.yPos;
-                maxLength = startYPos - roomHeight.m_Min;
+                startZPos = room.zPos;
+                maxLength = startZPos - roomHeight.m_Min;
                 break;
             case Direction.West:
                 startXPos = room.xPos;
-                startYPos = Random.Range (room.yPos, room.yPos + room.roomHeight);
+                startZPos = Random.Range (room.zPos, room.zPos + room.roomHeight);
                 maxLength = startXPos - roomWidth.m_Min;
                 break;
         }

@@ -32,7 +32,7 @@ public class RoomController : MonoBehaviour
   void PopulateLights (Room room)
   {
     GameObject obj = store.smallLight;
-    Vector3 position = new Vector3 (room.xPos + room.roomWidth / 2, room.yPos + room.roomHeight / 2, 0);
+    Vector3 position = new Vector3 (room.xPos + room.roomWidth / 2, 0, room.zPos + room.roomHeight / 2);
     Create(obj, position);
   }
 
