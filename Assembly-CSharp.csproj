@@ -56,6 +56,7 @@
      <Compile Include="Assets\Scripts\Inputs.cs" />
      <Compile Include="Assets\Scripts\IntRange.cs" />
      <Compile Include="Assets\Scripts\Laser.cs" />
+     <Compile Include="Assets\Scripts\LightFade.cs" />
      <Compile Include="Assets\Scripts\Movement.cs" />
      <Compile Include="Assets\Scripts\Room.cs" />
      <Compile Include="Assets\Scripts\RoomController.cs" />

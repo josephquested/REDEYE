@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Health : MonoBehaviour {
-
 	public int health;
+	public GameObject deathSystem;
+	public Vector3 deathSystemOffset;
 
 	public void Damage (int damage)
 	{
@@ -17,7 +18,12 @@ public class Health : MonoBehaviour {
 
 	void Die ()
 	{
-		print("i died!");
+		DeathParticles();
 		Destroy(gameObject);
+	}
+
+	void DeathParticles ()
+	{
+		Instantiate(deathSystem, transform.position + deathSystemOffset, transform.rotation);
 	}
 }
