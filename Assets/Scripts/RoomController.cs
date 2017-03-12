@@ -1,12 +1,14 @@
 using UnityEngine;
 
-public class Room
+public class RoomController : MonoBehaviour
 {
   public int xPos;                      // The x coordinate of the lower left tile of the room.
   public int yPos;                      // The y coordinate of the lower left tile of the room.
   public int roomWidth;                 // How many tiles wide the room is.
   public int roomHeight;                // How many tiles high the room is.
   public Direction enteringCorridor;    // The direction of the corridor that is entering this room.
+
+  Store store;                          // Store for room objects
 
   void Start ()
   {
@@ -76,5 +78,23 @@ public class Room
               yPos = Mathf.Clamp (yPos, 0, rows - roomHeight);
               break;
       }
-   }
+  }
+
+  public void PopulateRoom ()
+  {
+
+  }
+
+  void LightRoll ()
+  {
+    if (Random.Range(0, 5) == 0)
+    {
+      // InstantiateInRoom(store.)
+    }
+  }
+
+  void InstantiateInRoom (GameObject obj, Vector3 position, Vector3 rotation)
+  {
+
+  }
 }

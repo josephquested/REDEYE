@@ -28,7 +28,7 @@ public class Laser : MonoBehaviour {
 	IEnumerator FadeRoutine ()
 	{
 		laserLight.range -= decay;
-		laserAudio.volume -= decay / 10;
+		laserAudio.volume -= decay / 20;
 		yield return new WaitForSeconds(0.001f);
 		StartCoroutine(FadeRoutine());
 	}
