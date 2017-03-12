@@ -45,7 +45,7 @@ public class BoardCreator : MonoBehaviour
         GetComponentInChildren<RoomController>().Init(rooms, boardHolder);
 
         // Rotate the board up the right way
-        boardHolder.transform.Rotate(Vector3.right * 90);
+        // boardHolder.transform.Rotate(Vector3.right * 90);
     }
 
     void SetupTilesArray ()
@@ -104,7 +104,7 @@ public class BoardCreator : MonoBehaviour
 
     void SpawnPlayer (Room room)
     {
-      Vector3 playerPos = new Vector3 (room.xPos, 0, room.yPos);
+      Vector3 playerPos = new Vector3 (room.xPos, 0, room.zPos);
       Instantiate(player, playerPos, Quaternion.identity);
     }
 
@@ -124,10 +124,10 @@ public class BoardCreator : MonoBehaviour
                 // For each horizontal tile, go up vertically through the room's height.
                 for (int k = 0; k < currentRoom.roomHeight; k++)
                 {
-                    int yCoord = currentRoom.yPos + k;
+                    int zCoord = currentRoom.zPos + k;
 
                     // The coordinates in the jagged array are based on the room's position and it's width and height.
-                    tiles[xCoord][yCoord] = TileType.Floor;
+                    tiles[xCoord][zCoord] = TileType.Floor;
                 }
             }
         }
@@ -146,20 +146,20 @@ public class BoardCreator : MonoBehaviour
             {
                 // Start the coordinates at the start of the corridor.
                 int xCoord = currentCorridor.startXPos;
-                int yCoord = currentCorridor.startYPos;
+                int zCoord = currentCorridor.startZPos;
 
                 // Depending on the direction, add or subtract from the appropriate
                 // coordinate based on how far through the length the loop is.
                 switch (currentCorridor.direction)
                 {
                     case Direction.North:
-                        yCoord += j;
+                        zCoord += j;
                         break;
                     case Direction.East:
                         xCoord += j;
                         break;
                     case Direction.South:
-                        yCoord -= j;
+                        zCoord -= j;
                         break;
                     case Direction.West:
                         xCoord -= j;
@@ -167,7 +167,7 @@ public class BoardCreator : MonoBehaviour
                 }
 
                 // Set the tile at these coordinates to Floor.
-                tiles[xCoord][yCoord] = TileType.Floor;
+                tiles[xCoord][zCoord] = TileType.Floor;
             }
         }
     }
@@ -199,36 +199,36 @@ public class BoardCreator : MonoBehaviour
         // The outer walls are one unit left, right, up and down from the board.
         float leftEdgeX = -1f;
         float rightEdgeX = columns + 0f;
-        float bottomEdgeY = -1f;
-        float topEdgeY = rows + 0f;
+        float bottomEdgeZ = -1f;
+        float topEdgeZ = rows + 0f;
 
         // Instantiate both vertical walls (one on each side).
-        InstantiateVerticalOuterWall (leftEdgeX, bottomEdgeY, topEdgeY);
-        InstantiateVerticalOuterWall(rightEdgeX, bottomEdgeY, topEdgeY);
+        InstantiateVerticalOuterWall(leftEdgeX, bottomEdgeZ, topEdgeZ);
+        InstantiateVerticalOuterWall(rightEdgeX, bottomEdgeZ, topEdgeZ);
 
         // Instantiate both horizontal walls, these are one in left and right from the outer walls.
-        InstantiateHorizontalOuterWall(leftEdgeX + 1f, rightEdgeX - 1f, bottomEdgeY);
-        InstantiateHorizontalOuterWall(leftEdgeX + 1f, rightEdgeX - 1f, topEdgeY);
+        InstantiateHorizontalOuterWall(leftEdgeX + 1f, rightEdgeX - 1f, bottomEdgeZ);
+        InstantiateHorizontalOuterWall(leftEdgeX + 1f, rightEdgeX - 1f, topEdgeZ);
     }
 
 
-    void InstantiateVerticalOuterWall (float xCoord, float startingY, float endingY)
+    void InstantiateVerticalOuterWall (float xCoord, float startingZ, float endingZ)
     {
-        // Start the loop at the starting value for Y.
-        float currentY = startingY;
+        // Start the loop at the starting value for Z.
+        float currentZ = startingZ;
 
         // While the value for Y is less than the end value...
-        while (currentY <= endingY)
+        while (currentZ <= endingZ)
         {
-            // ... instantiate an outer wall tile at the x coordinate and the current y coordinate.
-            InstantiateFromArray(outerWallTiles, xCoord, currentY);
+            // ... instantiate an outer wall tile at the x coordinate and the current z coordinate.
+            InstantiateFromArray(outerWallTiles, xCoord, currentZ);
 
-            currentY++;
+            currentZ++;
         }
     }
 
 
-    void InstantiateHorizontalOuterWall (float startingX, float endingX, float yCoord)
+    void InstantiateHorizontalOuterWall (float startingX, float endingX, float zCoord)
     {
         // Start the loop at the starting value for X.
         float currentX = startingX;
@@ -236,21 +236,21 @@ public class BoardCreator : MonoBehaviour
         // While the value for X is less than the end value...
         while (currentX <= endingX)
         {
-            // ... instantiate an outer wall tile at the y coordinate and the current x coordinate.
-            InstantiateFromArray (outerWallTiles, currentX, yCoord);
+            // ... instantiate an outer wall tile at the z coordinate and the current x coordinate.
+            InstantiateFromArray(outerWallTiles, currentX, zCoord);
 
             currentX++;
         }
     }
 
 
-    void InstantiateFromArray (GameObject[] prefabs, float xCoord, float yCoord)
+    void InstantiateFromArray (GameObject[] prefabs, float xCoord, float zCoord)
     {
         // Create a random index for the array.
         int randomIndex = Random.Range(0, prefabs.Length);
 
         // The position to be instantiated at is based on the coordinates.
-        Vector3 position = new Vector3(xCoord, yCoord, 0f);
+        Vector3 position = new Vector3(xCoord, 0f, zCoord);
 
         // Create an instance of the prefab from the random index of the array.
         GameObject tileInstance = Instantiate(prefabs[randomIndex], position, Quaternion.identity) as GameObject;
