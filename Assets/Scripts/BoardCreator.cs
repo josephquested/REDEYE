@@ -73,6 +73,7 @@ public class BoardCreator : MonoBehaviour
 
         // Setup the first room, there is no previous corridor so we do not use one.
         rooms[0].SetupRoom(roomWidth, roomHeight, columns, rows);
+        rooms[0].entryRoom = true;
 
         // Setup the first corridor using the first room.
         corridors[0].SetupCorridor(rooms[0], corridorLength, roomWidth, roomHeight, columns, rows, true);
@@ -93,6 +94,14 @@ public class BoardCreator : MonoBehaviour
 
                 // Setup the corridor based on the room that was just created.
                 corridors[i].SetupCorridor(rooms[i], corridorLength, roomWidth, roomHeight, columns, rows, false);
+            }
+
+            // Sets the exitRoom varible for the last room
+            if (i == rooms.Length - 1)
+            {
+              print("setting exit room");
+              print(rooms[i]);
+              rooms[i].exitRoom = true;
             }
         }
 

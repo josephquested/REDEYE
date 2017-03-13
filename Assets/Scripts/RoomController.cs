@@ -20,6 +20,12 @@ public class RoomController : MonoBehaviour
 
     for (var i = 0; i < rooms.Length; i++)
     {
+      if (rooms[i].exitRoom)
+      {
+        PopulateExit(rooms[i]);
+        return;
+      }
+
       PopulateRoom(rooms[i]);
     }
   }
@@ -28,6 +34,12 @@ public class RoomController : MonoBehaviour
   {
     PopulateLights(room);
     PopulateTallGirls(room);
+  }
+
+  public void PopulateExit (Room room)
+  {
+    Vector3 position = new Vector3 (room.xPos + room.roomWidth / 2, 1, room.zPos + room.roomHeight / 2);
+    Create(store.exit, position);
   }
 
   void PopulateLights (Room room)
