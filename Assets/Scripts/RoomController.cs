@@ -38,13 +38,13 @@ public class RoomController : MonoBehaviour
 
   public void PopulateExit (Room room)
   {
-    Vector3 position = new Vector3 (room.xPos + room.roomWidth / 2, 1, room.zPos + room.roomHeight / 2);
+    Vector3 position = new Vector3 (room.xPos + room.roomWidth / 2, 0.1f, room.zPos + room.roomHeight / 2);
     Create(store.exit, position);
   }
 
   void PopulateLights (Room room)
   {
-    if (Random.Range(0, 4) == 0)
+    if (Random.Range(0, 3) == 0)
     {
       GameObject obj = store.smallLight;
       Vector3 position = new Vector3 (room.xPos + room.roomWidth / 2, obj.transform.position.y, room.zPos + room.roomHeight / 2);
