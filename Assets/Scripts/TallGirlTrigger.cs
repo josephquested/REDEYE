@@ -14,7 +14,6 @@ public class TallGirlTrigger : MonoBehaviour {
 	{
 		if (collider.tag == "Player")
 		{
-			print("found the player");
 			girl.Attack();
 		}
 	}

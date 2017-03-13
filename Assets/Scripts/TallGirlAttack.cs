@@ -7,7 +7,7 @@ public class TallGirlAttack : MonoBehaviour {
 	{
 		if (collider.tag == "Player")
 		{
-			Destroy(collider.gameObject);
+			collider.gameObject.GetComponent<Status>().Die();
 		}
 	}
 }

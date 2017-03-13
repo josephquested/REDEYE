@@ -27,6 +27,7 @@ public class RoomController : MonoBehaviour
   public void PopulateRoom (Room room)
   {
     PopulateLights(room);
+    PopulateTallGirls(room);
   }
 
   void PopulateLights (Room room)
@@ -34,6 +35,16 @@ public class RoomController : MonoBehaviour
     if (Random.Range(0, 4) == 0)
     {
       GameObject obj = store.smallLight;
+      Vector3 position = new Vector3 (room.xPos + room.roomWidth / 2, obj.transform.position.y, room.zPos + room.roomHeight / 2);
+      Create(obj, position);
+    }
+  }
+
+  void PopulateTallGirls (Room room)
+  {
+    if (Random.Range(0, 4) == 0)
+    {
+      GameObject obj = store.tallGirl;
       Vector3 position = new Vector3 (room.xPos + room.roomWidth / 2, obj.transform.position.y, room.zPos + room.roomHeight / 2);
       Create(obj, position);
     }
