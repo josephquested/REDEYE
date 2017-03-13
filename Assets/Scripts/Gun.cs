@@ -88,12 +88,12 @@ public class Gun : MonoBehaviour {
 
 	void UpdateLight ()
 	{
-		gunLight.range = heat * 3;
+		gunLight.range = heat * 5;
 	}
 
 	void UpdateAudio ()
 	{
-		gunRumbleAudio.volume = heat / 6;
+		gunRumbleAudio.volume = heat / 8;
 		gunRumbleAudio.pitch = heat * 4;
 	}
 

@@ -34,11 +34,11 @@ public class Laser : MonoBehaviour {
 		StartCoroutine(FadeRoutine());
 	}
 
-	void OnTriggerEnter (Collider collider)
+	void OnCollisionEnter (Collision collision)
 	{
-		if (collider.gameObject.GetComponent<Health>() != null)
+		if (collision.gameObject.GetComponent<Health>() != null)
 		{
-			collider.gameObject.GetComponent<Health>().Damage(damage);
+			collision.gameObject.GetComponent<Health>().Damage(damage);
 		}
 	}
 }
