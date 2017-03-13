@@ -7,6 +7,7 @@ public class RoomController : MonoBehaviour
   Store store;
 
   public int lightCount;
+  public int locks;
 
   void Awake ()
   {
