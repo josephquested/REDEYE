@@ -6,12 +6,15 @@ using UnityEngine.AI;
 public class TallGirl : MonoBehaviour {
 	Rigidbody rb;
 	Transform target;
+	Animator animator;
 
   public float speed;
+  public AudioSource attackAudio;
 
 	void Start ()
 	{
 		rb = GetComponent<Rigidbody>();
+		animator = GetComponent<Animator>();
 		target = GameObject.FindWithTag("Player").transform;
 	}
 
@@ -19,6 +22,7 @@ public class TallGirl : MonoBehaviour {
 	{
 		FacePlayer();
 		MoveForward();
+		Attack();
   }
 
 	void FacePlayer ()
@@ -30,6 +34,15 @@ public class TallGirl : MonoBehaviour {
 
 	void MoveForward ()
 	{
-		rb.AddForce(transform.forward * speed);
+		rb.velocity = transform.forward * speed;
+	}
+
+	void Attack ()
+	{
+		if (Input.GetButtonDown("Fire1"))
+		{
+			animator.SetTrigger("attack");
+			attackAudio.Play();
+		}
 	}
 }
