@@ -22,7 +22,6 @@ public class TallGirl : MonoBehaviour {
 	{
 		FacePlayer();
 		MoveForward();
-		Attack();
   }
 
 	void FacePlayer ()
@@ -37,12 +36,9 @@ public class TallGirl : MonoBehaviour {
 		rb.velocity = transform.forward * speed;
 	}
 
-	void Attack ()
+	public void Attack ()
 	{
-		if (Input.GetButtonDown("Fire1"))
-		{
-			animator.SetTrigger("attack");
-			attackAudio.Play();
-		}
+		animator.SetTrigger("attack");
+		attackAudio.Play();
 	}
 }
