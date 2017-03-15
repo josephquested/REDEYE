@@ -3,27 +3,66 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Exit : MonoBehaviour {
-	public int locks;
+	bool locked = true;
+
+	public int lockCount;
+	public GameObject[] locks;
 
 	void Start ()
 	{
-		locks = GameObject.FindWithTag("RoomController").GetComponent<RoomController>().locks;
+		// lockCount = GameObject.FindWithTag("RoomController").GetComponent<RoomController>().locks;
+		SetLocks();
+		if (lockCount == 0)
+		{
+			Unlock();
+		}
+	}
+
+	void SetLocks ()
+	{
+		int locksToDelete = 8 - lockCount;
+		for (int i = 0; i < locks.Length; i++)
+		{
+			if (locksToDelete > 0)
+			{
+				locksToDelete--;
+				Destroy(locks[i]);
+			}
+    }
 	}
 
 	void OnTriggerEnter (Collider collider)
 	{
 		if (collider.tag == "Player")
 		{
- 			if (locks <= 0)
+ 			if (!locked)
 			{
 				Win();
 			}
 		}
 	}
 
-	void DestroyLock ()
+	public void DestroyLock ()
 	{
+		for (int i = 0; i < locks.Length; i++)
+		{
+			if (locks[i] != null)
+			{
+				Destroy(locks[i]);
+				lockCount--;
+				if (lockCount == 0)
+				{
+					Unlock();
+				}
+				return;
+			}
+    }
+	}
 
+	void Unlock ()
+	{
+		locked = false;
+		GetComponentInChildren<Light>().color = Color.green;
 	}
 
 	void Win ()

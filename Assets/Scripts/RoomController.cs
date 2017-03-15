@@ -46,13 +46,11 @@ public class RoomController : MonoBehaviour
     {
       for (var i = 0; i < rooms.Length; i++)
       {
-        print(i);
         if (!rooms[i].exitRoom && !rooms[i].entryRoom)
         {
           if (Roll(4) && keys < locks)
           {
             Vector3 position = new Vector3 (rooms[i].xPos + rooms[i].roomWidth / 2, 1.5f, rooms[i].zPos + rooms[i].roomHeight / 2);
-            print(position);
             Create(store.key, position);
             keys += 1;
           }

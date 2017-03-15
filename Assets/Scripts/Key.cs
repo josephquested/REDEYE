@@ -10,6 +10,7 @@ public class Key : Health {
 
 	void Die ()
 	{
+		GameObject.FindWithTag("Exit").GetComponent<Exit>().DestroyLock();
 		DeathParticles();
 		Destroy(gameObject);
 	}
