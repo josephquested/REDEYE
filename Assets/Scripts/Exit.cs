@@ -5,12 +5,16 @@ using UnityEngine;
 public class Exit : MonoBehaviour {
 	bool locked = true;
 
+	public GameObject unlockEffects;
 	public int lockCount;
 	public GameObject[] locks;
 
 	void Start ()
 	{
-		lockCount = GameObject.FindWithTag("RoomController").GetComponent<RoomController>().locks;
+		if (GameObject.FindWithTag("RoomController") != null)
+		{
+			lockCount = GameObject.FindWithTag("RoomController").GetComponent<RoomController>().locks;
+		}
 		SetLocks();
 
 		if (lockCount == 0)
@@ -67,6 +71,7 @@ public class Exit : MonoBehaviour {
 	void Unlock ()
 	{
 		locked = false;
+		unlockEffects.SetActive(true);
 		GetComponentInChildren<Light>().color = Color.green;
 	}
 

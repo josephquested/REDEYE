@@ -9,8 +9,6 @@ public class BoardCreator : MonoBehaviour
         Wall, Floor,
     }
 
-    public int level = 0;
-
     public int columns = 100;                                 // The number of columns on the board (how wide it will be).
     public int rows = 100;                                    // The number of rows on the board (how tall it will be).
     public IntRange numRooms = new IntRange (15, 20);         // The range of the number of rooms there can be.
@@ -51,7 +49,7 @@ public class BoardCreator : MonoBehaviour
 
     void SetValues ()
     {
-      Level levelData = GetComponentInChildren<Levels>().levelsArray[level];
+      Level levelData = GetComponentInChildren<LevelController>().currentLevel;
       columns = levelData.columns;
       rows = levelData.rows;
       numRooms = levelData.numRooms;
