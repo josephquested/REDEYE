@@ -6,6 +6,8 @@ public class Lighthouse : MonoBehaviour {
 	Transform target;
 
 	public GameObject eye;
+	public float strength;
+	public bool trackPlayer;
 
 	void Start ()
 	{
@@ -14,14 +16,27 @@ public class Lighthouse : MonoBehaviour {
 
 	void Update ()
 	{
-		FacePlayer();
+		if (trackPlayer)
+		{
+			FacePlayer();
+		}
+		else
+		{
+			Rotate();
+		}
 	}
 
 	void FacePlayer ()
 	{
+		Quaternion targetRotation = Quaternion.LookRotation (target.position - eye.transform.position);
+		float str = Mathf.Min (strength * Time.deltaTime, 1);
+		eye.transform.rotation = Quaternion.Lerp (eye.transform.rotation, targetRotation, str);
+	}
 
-		Vector3 targetDir = target.position - transform.position;
-    Vector3 newDir = Vector3.RotateTowards(target.position, targetDir, 1, 0.0F);
-    eye.transform.rotation = Quaternion.LookRotation(newDir);
+	void Rotate ()
+	{
+		Quaternion targetRotation = Quaternion.LookRotation(Vector3.right);
+		float str = Mathf.Min (strength * Time.deltaTime, 1);
+		eye.transform.rotation = Quaternion.Lerp(eye.transform.rotation, targetRotation, str);
 	}
 }
