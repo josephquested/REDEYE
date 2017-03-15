@@ -7,6 +7,7 @@ public class Blade : MonoBehaviour {
 	Rigidbody rb;
 
 	public GameObject blade;
+	public int damage;
 	public float heatSpeed;
 	public float coolSpeed;
 	public float heat;
@@ -73,5 +74,14 @@ public class Blade : MonoBehaviour {
 	void Thrust ()
 	{
 		rb.AddForce(transform.forward * thrust);
+	}
+
+	public void ReceiveCollider (Collider collider)
+	{
+		if (collider.gameObject.GetComponent<Health>() != null)
+		{
+			collider.gameObject.GetComponent<Health>().Damage(damage);
+			rb.velocity = rb.velocity / 2;
+		}
 	}
 }

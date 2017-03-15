@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Blade.cs" />
+     <Compile Include="Assets\Scripts\BladeCollider.cs" />
      <Compile Include="Assets\Scripts\BoardCreator.cs" />
      <Compile Include="Assets\Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\Corridor.cs" />
