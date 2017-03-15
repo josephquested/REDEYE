@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelController : MonoBehaviour {
-	public Level[] levelsArray;
+	public Level[] levels;
 	public int levelNumber = 0;
 	public Level currentLevel;
 
 	void Awake ()
 	{
-		levelsArray = GetComponentsInChildren<Level>();
-		currentLevel = levelsArray[levelNumber];
+		levels = GetComponentsInChildren<Level>();
+		currentLevel = levels[levelNumber];
 	}
 
 	public void NextLevel ()
 	{
-
+		levelNumber++;
+		currentLevel = levels[levelNumber];
 	}
 }
