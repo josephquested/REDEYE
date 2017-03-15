@@ -60,6 +60,8 @@
      <Compile Include="Assets\Scripts\IntRange.cs" />
      <Compile Include="Assets\Scripts\Key.cs" />
      <Compile Include="Assets\Scripts\Laser.cs" />
+     <Compile Include="Assets\Scripts\Level.cs" />
+     <Compile Include="Assets\Scripts\Levels.cs" />
      <Compile Include="Assets\Scripts\LightFade.cs" />
      <Compile Include="Assets\Scripts\Movement.cs" />
      <Compile Include="Assets\Scripts\Orbit.cs" />

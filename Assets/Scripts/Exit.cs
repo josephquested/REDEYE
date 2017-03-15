@@ -10,8 +10,9 @@ public class Exit : MonoBehaviour {
 
 	void Start ()
 	{
-		// lockCount = GameObject.FindWithTag("RoomController").GetComponent<RoomController>().locks;
+		lockCount = GameObject.FindWithTag("RoomController").GetComponent<RoomController>().locks;
 		SetLocks();
+
 		if (lockCount == 0)
 		{
 			Unlock();
@@ -27,6 +28,10 @@ public class Exit : MonoBehaviour {
 			{
 				locksToDelete--;
 				Destroy(locks[i]);
+			}
+			else
+			{
+				return;
 			}
     }
 	}

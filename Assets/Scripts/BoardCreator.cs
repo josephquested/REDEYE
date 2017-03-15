@@ -9,6 +9,8 @@ public class BoardCreator : MonoBehaviour
         Wall, Floor,
     }
 
+    public int level = 0;
+
     public int columns = 100;                                 // The number of columns on the board (how wide it will be).
     public int rows = 100;                                    // The number of rows on the board (how tall it will be).
     public IntRange numRooms = new IntRange (15, 20);         // The range of the number of rooms there can be.
@@ -25,9 +27,11 @@ public class BoardCreator : MonoBehaviour
     private Corridor[] corridors;                             // All the corridors that connect the rooms.
     public GameObject boardHolder;                           // GameObject that acts as a container for all other tiles.
 
-
     private void Start ()
     {
+        // Sets the room values from the level object
+        SetValues();
+
         // Create the board holder.
         boardHolder = new GameObject("BoardHolder");
 
@@ -43,6 +47,20 @@ public class BoardCreator : MonoBehaviour
 
         // Start populating the rooms
         GetComponentInChildren<RoomController>().Init(rooms, boardHolder);
+    }
+
+    void SetValues ()
+    {
+      Level levelData = GetComponentInChildren<Levels>().levelsArray[level];
+      columns = levelData.columns;
+      rows = levelData.rows;
+      numRooms = levelData.numRooms;
+      roomWidth = levelData.roomWidth;
+      roomHeight = levelData.roomHeight;
+      corridorLength = levelData.corridorLength;
+      floorTiles = levelData.floorTiles;
+      wallTiles = levelData.wallTiles;
+      outerWallTiles = levelData.outerWallTiles;
     }
 
     void SetupTilesArray ()
