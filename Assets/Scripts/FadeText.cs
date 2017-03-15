@@ -12,7 +12,7 @@ public class FadeText : MonoBehaviour {
       {
         VanishText(GetComponent<Text>());
       }
-      else	
+      else
       {
         VanishText(GetComponent<Text>());
         StartCoroutine(InandOut());

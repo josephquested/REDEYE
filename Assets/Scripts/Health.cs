@@ -7,7 +7,7 @@ public class Health : MonoBehaviour {
 	public GameObject deathSystem;
 	public Vector3 deathSystemOffset;
 
-	public void Damage (int damage)
+	public virtual void Damage (int damage)
 	{
 		health -= damage;
 		if (health <= 0)

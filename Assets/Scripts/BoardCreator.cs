@@ -99,8 +99,6 @@ public class BoardCreator : MonoBehaviour
             // Sets the exitRoom varible for the last room
             if (i == rooms.Length - 1)
             {
-              print("setting exit room");
-              print(rooms[i]);
               rooms[i].exitRoom = true;
             }
         }
@@ -138,7 +136,6 @@ public class BoardCreator : MonoBehaviour
             }
         }
     }
-
 
     void SetTilesValuesForCorridors ()
     {

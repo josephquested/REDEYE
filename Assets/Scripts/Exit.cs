@@ -21,6 +21,11 @@ public class Exit : MonoBehaviour {
 		}
 	}
 
+	void DestroyLock ()
+	{
+
+	}
+
 	void Win ()
 	{
 		print("win!");

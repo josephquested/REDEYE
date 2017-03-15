@@ -8,6 +8,7 @@ public class RoomController : MonoBehaviour
 
   public int lightCount;
   public int locks;
+  public int keys = 0;
 
   void Awake ()
   {
@@ -19,6 +20,8 @@ public class RoomController : MonoBehaviour
     rooms = roomArr;
     boardHolder = holderObj.transform;
 
+    PopulateKeys();
+
     for (var i = 0; i < rooms.Length; i++)
     {
       if (rooms[i].exitRoom)
@@ -27,17 +30,39 @@ public class RoomController : MonoBehaviour
         return;
       }
 
-      PopulateRoom(rooms[i]);
+      PopulateProps(rooms[i]);
     }
   }
 
-  public void PopulateRoom (Room room)
+  void PopulateProps (Room room)
   {
     PopulateLights(room);
     PopulateTallGirls(room);
   }
 
-  public void PopulateExit (Room room)
+  void PopulateKeys ()
+  {
+    if (keys < locks)
+    {
+      for (var i = 0; i < rooms.Length; i++)
+      {
+        print(i);
+        if (!rooms[i].exitRoom && !rooms[i].entryRoom)
+        {
+          if (Roll(4) && keys < locks)
+          {
+            Vector3 position = new Vector3 (rooms[i].xPos + rooms[i].roomWidth / 2, 1.5f, rooms[i].zPos + rooms[i].roomHeight / 2);
+            print(position);
+            Create(store.key, position);
+            keys += 1;
+          }
+        }
+      }
+      PopulateKeys();
+    }
+  }
+
+  void PopulateExit (Room room)
   {
     Vector3 position = new Vector3 (room.xPos + room.roomWidth / 2, 0.1f, room.zPos + room.roomHeight / 2);
     Create(store.exit, position);
@@ -45,7 +70,7 @@ public class RoomController : MonoBehaviour
 
   void PopulateLights (Room room)
   {
-    if (Random.Range(0, 3) == 0)
+    if (Roll(3))
     {
       GameObject obj = store.smallLight;
       Vector3 position = new Vector3 (room.xPos + room.roomWidth / 2, obj.transform.position.y, room.zPos + room.roomHeight / 2);
@@ -55,7 +80,7 @@ public class RoomController : MonoBehaviour
 
   void PopulateTallGirls (Room room)
   {
-    if (Random.Range(0, 4) == 0)
+    if (Roll(4))
     {
       GameObject obj = store.tallGirl;
       Vector3 position = new Vector3 (room.xPos + room.roomWidth / 2, obj.transform.position.y, room.zPos + room.roomHeight / 2);
@@ -67,5 +92,10 @@ public class RoomController : MonoBehaviour
   {
     GameObject newObj = (GameObject)Instantiate(obj, position, boardHolder.rotation);
     newObj.transform.parent = boardHolder;
+  }
+
+  bool Roll (int upperInt)
+  {
+    return Random.Range(0, upperInt + 1) == 0;
   }
 }
