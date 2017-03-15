@@ -65,6 +65,7 @@
      <Compile Include="Assets\Scripts\LevelController.cs" />
      <Compile Include="Assets\Scripts\LightFade.cs" />
      <Compile Include="Assets\Scripts\Lighthouse.cs" />
+     <Compile Include="Assets\Scripts\LighthouseAttackTrigger.cs" />
      <Compile Include="Assets\Scripts\LighthouseAwareTrigger.cs" />
      <Compile Include="Assets\Scripts\Movement.cs" />
      <Compile Include="Assets\Scripts\Orbit.cs" />
