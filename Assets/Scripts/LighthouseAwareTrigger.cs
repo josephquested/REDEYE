@@ -7,18 +7,9 @@ public class LighthouseAwareTrigger : MonoBehaviour {
 
 	public Lighthouse lighthouse;
 
-	void Start ()
+	void Awake ()
 	{
 		audioSource = GetComponent<AudioSource>();
-	}
-
-	void OnTriggerEnter (Collider collider)
-	{
-		if (collider.tag == "Player")
-		{
-			lighthouse.trackPlayer = true;
-			audioSource.Play();
-		}
 	}
 
 	void OnTriggerExit (Collider collider)
@@ -26,7 +17,6 @@ public class LighthouseAwareTrigger : MonoBehaviour {
 		if (collider.tag == "Player")
 		{
 			lighthouse.trackPlayer = false;
-			audioSource.Stop();
 		}
 	}
 }

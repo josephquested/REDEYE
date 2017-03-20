@@ -5,20 +5,26 @@ using UnityEngine;
 public class Lighthouse : MonoBehaviour {
 	Transform target;
 	AudioSource audioSource;
+	Shake shake;
 	bool bakingPlayer;
+	bool destroyedPlayer;
 
 	public GameObject eye;
 	public float strength;
 	public float bake;
 	public float bakeSpeed;
+	public float rotateSpeed;
 	public ParticleSystem bakeParticles;
 	public Light spotLight;
+	public Light bakeLight;
 	public LighthouseAttackTrigger attackTrigger;
 	public bool trackPlayer;
+	public AudioClip explodePlayerClip;
 
 	void Start ()
 	{
 		target = GameObject.FindWithTag("Player").transform;
+		shake = GameObject.FindWithTag("MainCamera").GetComponent<Shake>();
 		audioSource = GetComponent<AudioSource>();
 	}
 
@@ -27,6 +33,8 @@ public class Lighthouse : MonoBehaviour {
 		UpdateTracking();
 		UpdateFire();
 		UpdateBake();
+		UpdateAudio();
+		UpdateLight();
 	}
 
 	void UpdateFire ()
@@ -58,18 +66,22 @@ public class Lighthouse : MonoBehaviour {
 		if (bakingPlayer)
 		{
 			bake += bakeSpeed;
+			shake.ReceiveInput(bake * 4);
 		}
 		else
 		{
 			bake -= bakeSpeed;
 		}
-		if (bake >= 1)
+		if (bake >= 1 && !destroyedPlayer)
 		{
 			if (GameObject.FindWithTag("Player") != null)
 			{
 				GameObject.FindWithTag("Player").GetComponent<Status>().Die();
-				attackTrigger.heat = 0;
-				StopFire();
+				destroyedPlayer = true;
+				audioSource.pitch = 1;
+				audioSource.clip = explodePlayerClip;
+				audioSource.loop = false;
+				audioSource.Play();
 			}
 		}
 		if (bake < 0)
@@ -82,8 +94,7 @@ public class Lighthouse : MonoBehaviour {
 	{
 		bakingPlayer = true;
 		bakeParticles.Play();
-		audioSource.Play();
-		spotLight.intensity = 300f;
+		spotLight.intensity = 50f;
 	}
 
 	void StopFire ()
@@ -103,8 +114,21 @@ public class Lighthouse : MonoBehaviour {
 
 	void Rotate ()
 	{
-		Quaternion targetRotation = Quaternion.LookRotation(Vector3.right);
-		float str = Mathf.Min (strength * Time.deltaTime, 1);
-		eye.transform.rotation = Quaternion.Lerp(eye.transform.rotation, targetRotation, str);
+		eye.transform.Rotate(Vector3.up * Time.deltaTime * rotateSpeed);
+	}
+
+	void UpdateAudio ()
+	{
+		audioSource.volume = bake * 4;
+		if (!destroyedPlayer)
+		{
+			audioSource.Play();
+			audioSource.pitch = bake * 20;
+		}
+	}
+
+	void UpdateLight ()
+	{
+		bakeLight.intensity = bake * 10;
 	}
 }

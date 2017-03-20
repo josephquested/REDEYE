@@ -51,6 +51,7 @@
      <Compile Include="Assets\Scripts\BoardCreator.cs" />
      <Compile Include="Assets\Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\Corridor.cs" />
+     <Compile Include="Assets\Scripts\DeadLighthouse.cs" />
      <Compile Include="Assets\Scripts\DeathCamera.cs" />
      <Compile Include="Assets\Scripts\Exit.cs" />
      <Compile Include="Assets\Scripts\FadeText.cs" />
@@ -67,6 +68,7 @@
      <Compile Include="Assets\Scripts\Lighthouse.cs" />
      <Compile Include="Assets\Scripts\LighthouseAttackTrigger.cs" />
      <Compile Include="Assets\Scripts\LighthouseAwareTrigger.cs" />
+     <Compile Include="Assets\Scripts\LighthouseHealth.cs" />
      <Compile Include="Assets\Scripts\Movement.cs" />
      <Compile Include="Assets\Scripts\Orbit.cs" />
      <Compile Include="Assets\Scripts\Room.cs" />

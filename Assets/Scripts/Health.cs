@@ -16,13 +16,13 @@ public class Health : MonoBehaviour {
 		}
 	}
 
-	void Die ()
+	public virtual void Die ()
 	{
 		DeathParticles();
 		Destroy(gameObject);
 	}
 
-	void DeathParticles ()
+	public virtual void DeathParticles ()
 	{
 		Instantiate(deathSystem, transform.position + deathSystemOffset, transform.rotation);
 	}

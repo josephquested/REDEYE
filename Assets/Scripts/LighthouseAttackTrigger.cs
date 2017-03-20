@@ -4,19 +4,29 @@ using UnityEngine;
 
 public class LighthouseAttackTrigger : MonoBehaviour {
 	AudioSource audioSource;
+	Transform target;
 
 	public Lighthouse lighthouse;
+	public Transform eyeCenter;
 	public ParticleSystem heatParticles;
 	public float heatSpeed;
 	public float heat = 0;
 	public bool heating;
+	public bool inSpotlight;
 
-	void Start ()
+	void Awake ()
 	{
 		audioSource = GetComponent<AudioSource>();
 	}
 
 	void Update ()
+	{
+		PlayerCheck();
+		UpdateHeat();
+		UpdateParticles();
+	}
+
+	void UpdateHeat ()
 	{
 		if (heating)
 		{
@@ -36,13 +46,61 @@ public class LighthouseAttackTrigger : MonoBehaviour {
 		}
 	}
 
+	void PlayerCheck ()
+	{
+		if (lighthouse.trackPlayer && inSpotlight)
+		{
+			RaycastHit hit;
+			if (Physics.Raycast(eyeCenter.position, eyeCenter.forward, out hit, Mathf.Infinity))
+			{
+				if (hit.collider.tag == "PlayerVisible")
+				{
+					Heating(true);
+				}
+				else
+				{
+					Heating(false);
+				}
+			}
+		}
+		else
+		{
+			Heating(false);
+		}
+	}
+
+	void Heating (bool shouldHeat)
+	{
+		if (shouldHeat)
+		{
+			heating = true;
+			audioSource.Play();
+		}
+		else
+		{
+			heating = false;
+			audioSource.Stop();
+		}
+	}
+
+	void UpdateParticles ()
+	{
+		if (inSpotlight)
+		{
+			heatParticles.Play();
+		}
+		else
+		{
+			heatParticles.Stop();
+		}
+	}
+
 	void OnTriggerEnter (Collider collider)
 	{
 		if (collider.tag == "Player")
 		{
-			heating = true;
-			heatParticles.Play();
-			audioSource.Play();
+			lighthouse.trackPlayer = true;
+			inSpotlight = true;
 		}
 	}
 
@@ -50,9 +108,7 @@ public class LighthouseAttackTrigger : MonoBehaviour {
 	{
 		if (collider.tag == "Player")
 		{
-			heating = false;
-			heatParticles.Stop();
-			audioSource.Stop();
+			inSpotlight = false;
 		}
 	}
 }

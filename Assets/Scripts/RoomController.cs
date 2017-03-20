@@ -38,6 +38,7 @@ public class RoomController : MonoBehaviour
   {
     PopulateLights(room);
     PopulateTallGirls(room);
+    PopulateLighthouses(room);
   }
 
   void PopulateKeys ()
@@ -81,6 +82,16 @@ public class RoomController : MonoBehaviour
     if (Roll(4))
     {
       GameObject obj = store.tallGirl;
+      Vector3 position = new Vector3 (room.xPos + room.roomWidth / 2, obj.transform.position.y, room.zPos + room.roomHeight / 2);
+      Create(obj, position);
+    }
+  }
+
+  void PopulateLighthouses (Room room)
+  {
+    if (Roll(4))
+    {
+      GameObject obj = store.lighthouse;
       Vector3 position = new Vector3 (room.xPos + room.roomWidth / 2, obj.transform.position.y, room.zPos + room.roomHeight / 2);
       Create(obj, position);
     }
