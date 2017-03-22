@@ -51,7 +51,7 @@ public class RoomController : MonoBehaviour
         {
           if (Roll(4) && keys < locks)
           {
-            Vector3 position = new Vector3 (rooms[i].xPos + rooms[i].roomWidth / 2, 1.5f, rooms[i].zPos + rooms[i].roomHeight / 2);
+            Vector3 position = GetPositionFromZone(rooms[i], store.key, 4);
             Create(store.key, position);
             keys += 1;
           }
@@ -72,7 +72,7 @@ public class RoomController : MonoBehaviour
     if (Roll(3))
     {
       GameObject obj = store.smallLight;
-      Vector3 position = new Vector3 (room.xPos + room.roomWidth / 2, obj.transform.position.y, room.zPos + room.roomHeight / 2);
+      Vector3 position = GetPositionFromZone(room, obj, 4);
       Create(obj, position);
     }
   }
@@ -82,7 +82,7 @@ public class RoomController : MonoBehaviour
     if (Roll(4))
     {
       GameObject obj = store.tallGirl;
-      Vector3 position = new Vector3 (room.xPos + room.roomWidth / 2, obj.transform.position.y, room.zPos + room.roomHeight / 2);
+      Vector3 position = GetPositionFromZone(room, obj, 4);
       Create(obj, position);
     }
   }
@@ -92,9 +92,18 @@ public class RoomController : MonoBehaviour
     if (Roll(4))
     {
       GameObject obj = store.lighthouse;
-      Vector3 position = new Vector3 (room.xPos + room.roomWidth / 2, obj.transform.position.y, room.zPos + room.roomHeight / 2);
+      Vector3 position = GetPositionFromZone(room, obj, 4);
       Create(obj, position);
     }
+  }
+
+  Vector3 GetPositionFromZone (Room room, GameObject obj, int zone)
+  {
+    if (zone == 4)
+    {
+      return new Vector3 (room.xPos + room.roomWidth * 0.5f, obj.transform.position.y, room.zPos + room.roomHeight * 0.5f);
+    }
+    else return Vector3.zero;
   }
 
   void Create (GameObject obj, Vector3 position)

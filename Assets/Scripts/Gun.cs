@@ -80,7 +80,7 @@ public class Gun : MonoBehaviour {
 	void Fire ()
 	{
 		GameObject laser = (GameObject)Instantiate(laserPrefab, laserSpawn.position, laserSpawn.rotation);
-		laser.GetComponent<Rigidbody>().AddForce(transform.forward * laserSpeed);
+		laser.GetComponent<Rigidbody>().AddForce(gun.transform.forward * laserSpeed);
 		animator.SetTrigger("gun-fire");
 		gunFireAudio.Play();
 		Recoil();
