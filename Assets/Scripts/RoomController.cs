@@ -36,9 +36,9 @@ public class RoomController : MonoBehaviour
 
   void PopulateProps (Room room)
   {
-    PopulateLights(room);
-    PopulateTallGirls(room);
-    PopulateLighthouses(room);
+    Populate(room, store.smallLight, 4);
+    Populate(room, store.tallGirl, 4);
+    Populate(room, store.lighthouse, 4);
   }
 
   void PopulateKeys ()
@@ -51,7 +51,7 @@ public class RoomController : MonoBehaviour
         {
           if (Roll(4) && keys < locks)
           {
-            Vector3 position = GetPositionFromZone(rooms[i], store.key, 4);
+            Vector3 position = GetPositionFromZone(rooms[i], store.key, Random.Range(0, 9));
             Create(store.key, position);
             keys += 1;
           }
@@ -63,47 +63,61 @@ public class RoomController : MonoBehaviour
 
   void PopulateExit (Room room)
   {
-    Vector3 position = new Vector3 (room.xPos + room.roomWidth / 2, 0.1f, room.zPos + room.roomHeight / 2);
+    Vector3 position = GetPositionFromZone(room, store.exit, 4);
     Create(store.exit, position);
   }
 
-  void PopulateLights (Room room)
+  void Populate (Room room, GameObject obj, int roll)
   {
-    if (Roll(3))
+    if (Roll(roll))
     {
-      GameObject obj = store.smallLight;
-      Vector3 position = GetPositionFromZone(room, obj, 4);
-      Create(obj, position);
-    }
-  }
-
-  void PopulateTallGirls (Room room)
-  {
-    if (Roll(4))
-    {
-      GameObject obj = store.tallGirl;
-      Vector3 position = GetPositionFromZone(room, obj, 4);
-      Create(obj, position);
-    }
-  }
-
-  void PopulateLighthouses (Room room)
-  {
-    if (Roll(4))
-    {
-      GameObject obj = store.lighthouse;
-      Vector3 position = GetPositionFromZone(room, obj, 4);
-      Create(obj, position);
+      int zone = Random.Range(0, 9);
+      if (!room.zones[zone])
+      {
+        Vector3 position = GetPositionFromZone(room, obj, zone);
+        Create(obj, position);
+      }
     }
   }
 
   Vector3 GetPositionFromZone (Room room, GameObject obj, int zone)
   {
-    if (zone == 4)
+    room.zones[zone] = true;
+
+    switch (zone)
     {
-      return new Vector3 (room.xPos + room.roomWidth * 0.5f, obj.transform.position.y, room.zPos + room.roomHeight * 0.5f);
+      case 0:
+        return new Vector3 (room.xPos + room.roomWidth * 0.25f, obj.transform.position.y, room.zPos + room.roomHeight * 0.75f);
+        break;
+      case 1:
+        return new Vector3 (room.xPos + room.roomWidth * 0.5f, obj.transform.position.y, room.zPos + room.roomHeight * 0.75f);
+        break;
+      case 2:
+        return new Vector3 (room.xPos + room.roomWidth * 0.75f, obj.transform.position.y, room.zPos + room.roomHeight * 0.75f);
+        break;
+      case 3:
+        return new Vector3 (room.xPos + room.roomWidth * 0.25f, obj.transform.position.y, room.zPos + room.roomHeight * 0.5f);
+        break;
+      case 4:
+        return new Vector3 (room.xPos + room.roomWidth * 0.5f, obj.transform.position.y, room.zPos + room.roomHeight * 0.5f);
+        break;
+      case 5:
+        return new Vector3 (room.xPos + room.roomWidth * 0.75f, obj.transform.position.y, room.zPos + room.roomHeight * 0.5f);
+        break;
+      case 6:
+        return new Vector3 (room.xPos + room.roomWidth * 0.25f, obj.transform.position.y, room.zPos + room.roomHeight * 0.25f);
+        break;
+      case 7:
+        return new Vector3 (room.xPos + room.roomWidth * 0.5f, obj.transform.position.y, room.zPos + room.roomHeight * 0.25f);
+        break;
+      case 8:
+        return new Vector3 (room.xPos + room.roomWidth * 0.75f, obj.transform.position.y, room.zPos + room.roomHeight * 0.25f);
+        break;
+      default:
+        print("zone spawn error");
+        return Vector3.zero;
+        break;
     }
-    else return Vector3.zero;
   }
 
   void Create (GameObject obj, Vector3 position)

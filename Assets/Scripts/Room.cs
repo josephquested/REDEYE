@@ -10,6 +10,8 @@ public class Room
   public bool entryRoom;                // The room the player enters into
   public bool exitRoom;                // The room with the exit
 
+  public bool[] zones = new bool[9];
+
   // This is used for the first room.  It does not have a Corridor parameter since there are no corridors yet.
   public void SetupRoom (IntRange widthRange, IntRange heightRange, int columns, int rows)
   {
@@ -21,7 +23,6 @@ public class Room
       xPos = Mathf.RoundToInt(columns / 2f - roomWidth / 2f);
       zPos = Mathf.RoundToInt(rows / 2f - roomHeight / 2f);
   }
-
 
   // This is an overload of the SetupRoom function and has a corridor parameter that represents the corridor entering the room.
   public void SetupRoom (IntRange widthRange, IntRange heightRange, int columns, int rows, Corridor corridor)
