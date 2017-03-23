@@ -37,8 +37,16 @@ public class RoomController : MonoBehaviour
   void PopulateProps (Room room)
   {
     Populate(room, store.smallLight, 4);
-    Populate(room, store.tallGirl, 4);
-    Populate(room, store.lighthouse, 4);
+
+    if (!room.entryRoom)
+    {
+      Populate(room, store.tallGirl, 4);
+      Populate(room, store.lighthouse, 4);
+    }
+    else
+    {
+      print("tried to populate entry room!");
+    }
   }
 
   void PopulateKeys ()
@@ -80,10 +88,20 @@ public class RoomController : MonoBehaviour
     }
   }
 
+  void Create (GameObject obj, Vector3 position)
+  {
+    GameObject newObj = (GameObject)Instantiate(obj, position, boardHolder.rotation);
+    newObj.transform.parent = boardHolder;
+  }
+
+  bool Roll (int upperInt)
+  {
+    return Random.Range(0, upperInt + 1) == 0;
+  }
+
   Vector3 GetPositionFromZone (Room room, GameObject obj, int zone)
   {
     room.zones[zone] = true;
-
     switch (zone)
     {
       case 0:
@@ -118,16 +136,5 @@ public class RoomController : MonoBehaviour
         return Vector3.zero;
         break;
     }
-  }
-
-  void Create (GameObject obj, Vector3 position)
-  {
-    GameObject newObj = (GameObject)Instantiate(obj, position, boardHolder.rotation);
-    newObj.transform.parent = boardHolder;
-  }
-
-  bool Roll (int upperInt)
-  {
-    return Random.Range(0, upperInt + 1) == 0;
   }
 }

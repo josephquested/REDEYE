@@ -20,7 +20,7 @@ public class DeadLighthouse : MonoBehaviour {
 		GetComponent<AudioSource>();
 		spotLight.color = Color.white;
 		ambientLight.color = Color.white;
-		ambientLight.intensity /= 2;
+		ambientLight.intensity /= 4;
 		eyeRenderer.material.color = Color.white;
 		Destroy(attackTrigger);
 		Destroy(bakeParticles);
