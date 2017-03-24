@@ -12,10 +12,19 @@ public class LighthouseAwareTrigger : MonoBehaviour {
 		audioSource = GetComponent<AudioSource>();
 	}
 
+	void OnTriggerEnter (Collider collider)
+	{
+		if (collider.tag == "Player")
+		{
+			audioSource.Play();
+		}
+	}
+
 	void OnTriggerExit (Collider collider)
 	{
 		if (collider.tag == "Player")
 		{
+			audioSource.Stop();
 			lighthouse.trackPlayer = false;
 		}
 	}
