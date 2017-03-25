@@ -83,11 +83,6 @@ public class RoomController : MonoBehaviour
         Vector3 position = GetPositionFromZone(room, obj, zone);
         Create(obj, position);
       }
-      else
-      {
-        print("tried to populate zone " + zone);
-        print("but it was full!");
-      }
     }
   }
 
@@ -109,31 +104,31 @@ public class RoomController : MonoBehaviour
     {
       case 0:
         return new Vector3 (room.xPos + room.roomWidth * 0.25f, obj.transform.position.y, room.zPos + room.roomHeight * 0.75f);
-        // break;
+
       case 1:
         return new Vector3 (room.xPos + room.roomWidth * 0.5f, obj.transform.position.y, room.zPos + room.roomHeight * 0.75f);
-        // break;
+
       case 2:
         return new Vector3 (room.xPos + room.roomWidth * 0.75f, obj.transform.position.y, room.zPos + room.roomHeight * 0.75f);
-        // break;
+
       case 3:
         return new Vector3 (room.xPos + room.roomWidth * 0.25f, obj.transform.position.y, room.zPos + room.roomHeight * 0.5f);
-        // break;
+
       case 4:
         return new Vector3 (room.xPos + room.roomWidth * 0.5f, obj.transform.position.y, room.zPos + room.roomHeight * 0.5f);
-        // break;
+
       case 5:
         return new Vector3 (room.xPos + room.roomWidth * 0.75f, obj.transform.position.y, room.zPos + room.roomHeight * 0.5f);
-        // break;
+
       case 6:
         return new Vector3 (room.xPos + room.roomWidth * 0.25f, obj.transform.position.y, room.zPos + room.roomHeight * 0.25f);
-        // break;
+
       case 7:
         return new Vector3 (room.xPos + room.roomWidth * 0.5f, obj.transform.position.y, room.zPos + room.roomHeight * 0.25f);
-        // break;
+
       case 8:
         return new Vector3 (room.xPos + room.roomWidth * 0.75f, obj.transform.position.y, room.zPos + room.roomHeight * 0.25f);
-        // break;
+
       default:
         print("zone spawn error");
         return Vector3.zero;

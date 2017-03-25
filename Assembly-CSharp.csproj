@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\DeadLighthouse.cs" />
      <Compile Include="Assets\Scripts\DeathCamera.cs" />
      <Compile Include="Assets\Scripts\Dronefly.cs" />
+     <Compile Include="Assets\Scripts\DroneflyAttackTrigger.cs" />
      <Compile Include="Assets\Scripts\Exit.cs" />
      <Compile Include="Assets\Scripts\FadeText.cs" />
      <Compile Include="Assets\Scripts\Gun.cs" />
