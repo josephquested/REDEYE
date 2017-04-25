@@ -6,12 +6,13 @@ using UnityEngine.AI;
 public class Dronefly : MonoBehaviour {
 	Rigidbody rb;
 	Transform target;
-	Animator animator;
 	Shake shake;
 	AudioSource audioSource;
 
 	public DroneflyAttackTrigger attackTrigger;
+	public AudioSource bakeAudio;
 	public AudioClip explodePlayerClip;
+	public ParticleSystem bakeParticles;
 
   public float speed;
   public float cooldown;
@@ -26,7 +27,6 @@ public class Dronefly : MonoBehaviour {
 	void Start ()
 	{
 		rb = GetComponent<Rigidbody>();
-		animator = GetComponent<Animator>();
 		shake = GameObject.FindWithTag("MainCamera").GetComponent<Shake>();
 		target = GameObject.FindWithTag("Player").transform;
 		audioSource = GetComponent<AudioSource>();
@@ -37,6 +37,8 @@ public class Dronefly : MonoBehaviour {
 		FacePlayer();
 		Rise();
 		UpdateBake();
+		UpdateBakeParticles();
+		UpdateAudio();
 
 		if (!striking)
 		{
@@ -64,7 +66,7 @@ public class Dronefly : MonoBehaviour {
 		if (attackTrigger.inTrigger)
 		{
 			bake += bakeSpeed;
-			shake.ReceiveInput(bake * 4);
+			shake.ReceiveInput(bake * 10);
 		}
 		else
 		{
@@ -96,5 +98,29 @@ public class Dronefly : MonoBehaviour {
 	void Rise ()
 	{
 		rb.AddForce(Vector3.up * 2);
+	}
+
+	void UpdateAudio ()
+	{
+		if (attackTrigger.inTrigger && !bakeAudio.isPlaying)
+		{
+			bakeAudio.Play();
+		}
+		if (!attackTrigger.inTrigger && bakeAudio.isPlaying)
+		{
+			bakeAudio.Stop();
+		}
+	}
+
+	void UpdateBakeParticles ()
+	{
+		if (attackTrigger.inTrigger && !bakeParticles.isPlaying)
+		{
+			bakeParticles.Play();
+		}
+		if (!attackTrigger.inTrigger && bakeParticles.isPlaying)
+		{
+			bakeParticles.Stop();
+		}
 	}
 }
