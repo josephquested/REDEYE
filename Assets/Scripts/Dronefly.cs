@@ -13,6 +13,7 @@ public class Dronefly : MonoBehaviour {
 	public AudioSource bakeAudio;
 	public AudioClip explodePlayerClip;
 	public ParticleSystem bakeParticles;
+	public AwareTrigger awareTrigger;
 
   public float speed;
   public float cooldown;
@@ -34,15 +35,18 @@ public class Dronefly : MonoBehaviour {
 
   void Update ()
 	{
-		FacePlayer();
-		Rise();
-		UpdateBake();
-		UpdateBakeParticles();
-		UpdateAudio();
-
-		if (!striking)
+		if (awareTrigger.aware)
 		{
-			StartCoroutine(StrikeRoutine());
+			FacePlayer();
+			Rise();
+			UpdateBake();
+			UpdateBakeParticles();
+			UpdateAudio();
+
+			if (!striking)
+			{
+				StartCoroutine(StrikeRoutine());
+			}
 		}
   }
 
