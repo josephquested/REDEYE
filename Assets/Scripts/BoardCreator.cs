@@ -45,9 +45,6 @@ public class BoardCreator : MonoBehaviour
 
         // Start populating the rooms
         GetComponentInChildren<RoomController>().Init(rooms, boardHolder);
-
-        // display the current level
-        GetComponentInChildren<LevelController>().DisplayLevelText();
     }
 
     void SetValues ()

@@ -8,8 +8,6 @@ public class LevelController : MonoBehaviour {
 	public int levelNumber = 0;
 	public Level currentLevel;
 
-	public Text levelText;
-
 	void Awake ()
 	{
 		levels = GetComponentsInChildren<Level>();
@@ -20,11 +18,5 @@ public class LevelController : MonoBehaviour {
 	{
 		levelNumber++;
 		currentLevel = levels[levelNumber];
-	}
-
-	public void DisplayLevelText ()
-	{
-		print(levelNumber);
-		levelText.text = levelNumber.ToString();
 	}
 }
