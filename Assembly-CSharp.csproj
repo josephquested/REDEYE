@@ -46,27 +46,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Packages\General\CustomAttributes\GreaterThanFloat.cs" />
-     <Compile Include="Assets\Packages\General\CustomAttributes\GreaterThanInt.cs" />
-     <Compile Include="Assets\Packages\General\CustomAttributes\InvisibleInInspector.cs" />
-     <Compile Include="Assets\Packages\General\CustomAttributes\LessThanFloat.cs" />
-     <Compile Include="Assets\Packages\General\CustomAttributes\LessThanInt.cs" />
-     <Compile Include="Assets\Packages\General\CustomAttributes\ReadOnlyInInspector.cs" />
-     <Compile Include="Assets\Packages\General\OtherCode\SerializeUnityThings.cs" />
-     <Compile Include="Assets\Packages\MazeMagician\Scripts\Maze.cs" />
-     <Compile Include="Assets\Packages\MazeMagician\Scripts\MazeGenerator.cs" />
-     <Compile Include="Assets\Packages\MazeMagician\Scripts\MazeNode.cs" />
-     <Compile Include="Assets\Packages\MazeMagician\Scripts\PlazaPrefab.cs" />
-     <Compile Include="Assets\Packages\MazeMagician\Scripts\SerializableClasses\FloorPiece.cs" />
-     <Compile Include="Assets\Packages\MazeMagician\Scripts\SerializableClasses\MazeMap.cs" />
-     <Compile Include="Assets\Packages\MazeMagician\Scripts\SerializableClasses\MazeSettings.cs" />
-     <Compile Include="Assets\Packages\MazeMagician\Scripts\SerializableClasses\OtherDetail.cs" />
-     <Compile Include="Assets\Packages\MazeMagician\Scripts\SerializableClasses\TwoDimensionalDetail.cs" />
-     <Compile Include="Assets\Packages\MazeMagician\Scripts\SerializableClasses\WallDetail.cs" />
-     <Compile Include="Assets\Packages\MazeMagician\Scripts\SerializableClasses\WallPiece.cs" />
-     <Compile Include="Assets\Packages\MazeMagician\Scripts\SerializableClasses\WallPiece2D.cs" />
-     <None Include="Assets\Packages\MazeMagician\README_MazeMagician.txt" />
-     <None Include="Assets\Packages\General\README_General.txt" />
+     <Compile Include="Assets\Scripts\MouseLook.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
