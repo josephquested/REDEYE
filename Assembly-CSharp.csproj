@@ -51,10 +51,52 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
      <Compile Include="Assets\Scripts\Player\MouseLook.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerInput.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
+=======
+     <Compile Include="Assets\Scripts\AwareTrigger.cs" />
+     <Compile Include="Assets\Scripts\Blade.cs" />
+     <Compile Include="Assets\Scripts\BladeCollider.cs" />
+     <Compile Include="Assets\Scripts\BoardCreator.cs" />
+     <Compile Include="Assets\Scripts\CameraController.cs" />
+     <Compile Include="Assets\Scripts\Corridor.cs" />
+     <Compile Include="Assets\Scripts\DeadLighthouse.cs" />
+     <Compile Include="Assets\Scripts\DeathCamera.cs" />
+     <Compile Include="Assets\Scripts\Dronefly.cs" />
+     <Compile Include="Assets\Scripts\DroneflyAttackTrigger.cs" />
+     <Compile Include="Assets\Scripts\Exit.cs" />
+     <Compile Include="Assets\Scripts\FadeText.cs" />
+     <Compile Include="Assets\Scripts\Gun.cs" />
+     <Compile Include="Assets\Scripts\Halflife.cs" />
+     <Compile Include="Assets\Scripts\Health.cs" />
+     <Compile Include="Assets\Scripts\Inputs.cs" />
+     <Compile Include="Assets\Scripts\IntRange.cs" />
+     <Compile Include="Assets\Scripts\Key.cs" />
+     <Compile Include="Assets\Scripts\Laser.cs" />
+     <Compile Include="Assets\Scripts\Level.cs" />
+     <Compile Include="Assets\Scripts\LevelController.cs" />
+     <Compile Include="Assets\Scripts\LightFade.cs" />
+     <Compile Include="Assets\Scripts\Lighthouse.cs" />
+     <Compile Include="Assets\Scripts\LighthouseAttackTrigger.cs" />
+     <Compile Include="Assets\Scripts\LighthouseAwareTrigger.cs" />
+     <Compile Include="Assets\Scripts\LighthouseHealth.cs" />
+     <Compile Include="Assets\Scripts\Movement.cs" />
+     <Compile Include="Assets\Scripts\Orbit.cs" />
+     <Compile Include="Assets\Scripts\Room.cs" />
+     <Compile Include="Assets\Scripts\RoomController.cs" />
+     <Compile Include="Assets\Scripts\Shake.cs" />
+     <Compile Include="Assets\Scripts\StartGame.cs" />
+     <Compile Include="Assets\Scripts\Status.cs" />
+     <Compile Include="Assets\Scripts\Store.cs" />
+     <Compile Include="Assets\Scripts\TallGirl.cs" />
+     <Compile Include="Assets\Scripts\TallGirlAttack.cs" />
+     <Compile Include="Assets\Scripts\TallGirlTrigger.cs" />
+     <None Include="Assets\Scripts\Backlog.txt" />
+     <None Include="Assets\Fonts\Montserrat\OFL.txt" />
+>>>>>>> parent of 4b12f6f... initial level number ui work
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
